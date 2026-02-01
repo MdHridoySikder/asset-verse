@@ -10,11 +10,13 @@ import WhatClientsSay from "./WhatClientsSay";
 import FinalCTA from "./FinalCTA";
 import FAQSection from "./FAQSection";
 import Mission from "./Mission";
+import Carousel from "./Carousel";
 
 const Home = () => {
   return (
     <div className="bg-gradient-to-br from-blue-50 via-blue-100 to-blue-50">
       {/* Carousel added */}
+      <Carousel />
       <Welcome />
       <TrustedBy />
       <Mission />
