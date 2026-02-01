@@ -5,6 +5,7 @@ import TrustedBy from "./TrustedBy";
 import Welcome from "./Welcome";
 import Industries from "./Industries";
 import HowItWorks from "./HowItWorks";
+import ChatWidget from "./ChatWidget";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Industries />
       <TrustedBy />
       <HowItWorks />
+      <ChatWidget></ChatWidget>
     </div>
   );
 };
