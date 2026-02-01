@@ -8,6 +8,7 @@ import HowItWorks from "./HowItWorks";
 import ChatWidget from "./ChatWidget";
 import WhatClientsSay from "./WhatClientsSay";
 import FinalCTA from "./FinalCTA";
+import FAQSection from "./FAQSection";
 
 const Home = () => {
   return (
@@ -16,9 +17,10 @@ const Home = () => {
       <Industries />
       <TrustedBy />
       <HowItWorks />
-      <ChatWidget></ChatWidget>
-      <WhatClientsSay></WhatClientsSay>
+      <ChatWidget />
+      <WhatClientsSay />
       <FinalCTA />
+      <FAQSection />
     </div>
   );
 };
