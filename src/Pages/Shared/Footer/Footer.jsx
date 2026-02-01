@@ -2,20 +2,18 @@ import { CopyPlus, HousePlus } from "lucide-react";
 import React from "react";
 import { BiPhoneIncoming } from "react-icons/bi";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
-
 import { MdEmail } from "react-icons/md";
 import { PiAddressBookThin } from "react-icons/pi";
-
 import { Link, NavLink } from "react-router";
 
 const Footer = () => {
   return (
-    <footer className=" bg-gradient-to-br from-blue-100 via-white to-blue-100 container text-black py-8">
-      <div className="w-11/12 mx-auto grid grid-cols-1 md:grid-cols-4 gap-10 px-6">
-        {/* Logo + Description */}
-
+    <footer className="bg-gradient-to-br from-blue-100 via-blue-50 to-blue-50 text-black pt-12">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-10 px-6">
+        {/* Logo */}
+        {/* Logo */}
         <div>
-          <div className=" flex items-center gap-1">
+          <div className="flex items-center gap-2">
             <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-green-700">
               <img
                 src="/Logo.png"
@@ -23,8 +21,6 @@ const Footer = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-
-            {/* Logo Text */}
             <NavLink
               to="/"
               className="text-3xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-blue-400 to-blue-500"
@@ -32,6 +28,12 @@ const Footer = () => {
               AssetVerse
             </NavLink>
           </div>
+
+          {/* Small description */}
+          <p className="mt-3 text-sm text-gray-600 max-w-xs leading-relaxed">
+            A smart asset management platform to track, assign, and manage
+            company assets with ease.
+          </p>
         </div>
 
         {/* Quick Links */}
@@ -39,64 +41,74 @@ const Footer = () => {
           <h4 className="text-lg font-extrabold text-blue-500 mb-5">
             Quick Links
           </h4>
-
-          <ul className="menu menu-horizontal px- gap-3">
-            <div className="border-2 border-gray-200">
-              <li>
-                <Link to="/">
-                  <HousePlus className="w-4 h-4" />
-                  Home
-                </Link>
-              </li>
-            </div>
-            <div className="border-2 border-gray-200">
-              <li>
-                <Link>
-                  <CopyPlus className="w-4 h-4" />
-                  Join as Employee
-                </Link>
-              </li>
-            </div>
-            <div className="border-2 border-gray-200 ">
-              <li>
-                <Link>
-                  <CopyPlus className="w-4 h-4" />
-                  Join as HR Manager
-                </Link>
-              </li>
-            </div>
+          <ul className="space-y-3 text-sm">
+            <li>
+              <Link
+                to="/"
+                className="flex items-center gap-2 hover:text-blue-600"
+              >
+                <HousePlus className="w-4 h-4" /> Home
+              </Link>
+            </li>
+            <li>
+              <Link className="flex items-center gap-2 hover:text-blue-600">
+                <CopyPlus className="w-4 h-4" /> Join as Employee
+              </Link>
+            </li>
+            <li>
+              <Link className="flex items-center gap-2 hover:text-blue-600">
+                <CopyPlus className="w-4 h-4" /> Join as HR Manager
+              </Link>
+            </li>
           </ul>
         </div>
 
-        {/* Social Icons */}
-        <div className="flex flex-col items-start md:items-center">
-          <h4 className="text-lg font-extrabold  text-blue-500 mb-8">
+        {/* Resources */}
+        <div>
+          <h4 className="text-lg font-bold text-blue-600 mb-5">Resources</h4>
+          <ul className="space-y-3 text-sm">
+            <li>
+              <Link to="/about" className="hover:text-blue-600">
+                About Us
+              </Link>
+            </li>
+            <li>
+              <Link to="/pricing" className="hover:text-blue-600">
+                Pricing
+              </Link>
+            </li>
+            <li>
+              <Link to="/faq" className="hover:text-blue-600">
+                FAQs
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="hover:text-blue-600">
+                Contact Support
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Social */}
+        <div>
+          <h4 className="text-lg font-extrabold text-blue-500 mb-5">
             Follow Us
           </h4>
-
-          <div className="flex gap-6 text-2xl">
-            <a
-              href="#"
-              className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white hover:bg-blue-600 transition-all transform hover:scale-110 shadow-md"
-            >
+          <div className="flex gap-5 text-xl">
+            <a className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white hover:scale-110 transition">
               <FaFacebookF />
             </a>
-            <a
-              href="#"
-              className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white hover:bg-blue-600 transition-all transform hover:scale-110 shadow-md"
-            >
+            <a className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white hover:scale-110 transition">
               <FaInstagram />
             </a>
-            <a
-              href="#"
-              className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white hover:bg-blue-600 transition-all transform hover:scale-110 shadow-md"
-            >
+            <a className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white hover:scale-110 transition">
               <FaLinkedinIn />
             </a>
           </div>
         </div>
 
-        {/* Contact Info */}
+        {/* Contact */}
         <div>
           <h4 className="text-lg font-extrabold text-blue-500 mb-5">
             Contact Info
@@ -115,9 +127,10 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Bottom Line */}
-      <div className="border-t border-gray-800  mt-12 pt-4 text-center text-sm text-gray-500">
-        © 2026 EcoTrack | All rights reserved.
+      {/* Bottom */}
+      <div className="border-t border-blue-200 mt-12 py-4 text-center text-sm text-gray-600">
+        © 2026 <span className="font-semibold">AssetVerse</span> | All rights
+        reserved.
       </div>
     </footer>
   );
