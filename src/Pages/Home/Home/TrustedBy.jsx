@@ -35,7 +35,7 @@ const TrustedBy = () => {
         <h2 className="text-3xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 bg-clip-text text-transparent drop-shadow-lg">
           Powering Smart Asset Decisions Globally
         </h2>
-        <p className="text-gray-700 md:text-xl max-w-3xl mx-auto leading-relaxed drop-shadow-sm">
+        <p className="text-gray-700 text-xm md:text-xl max-w-4xl mx-auto leading-relaxed drop-shadow-lg">
           AssetVerse is trusted by forward-thinking companies to streamline
           asset management, improve visibility, and drive confident, data-driven
           decisions across their organizations.
