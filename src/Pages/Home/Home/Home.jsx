@@ -7,6 +7,7 @@ import Industries from "./Industries";
 import HowItWorks from "./HowItWorks";
 import ChatWidget from "./ChatWidget";
 import WhatClientsSay from "./WhatClientsSay";
+import FinalCTA from "./FinalCTA";
 
 const Home = () => {
   return (
@@ -17,6 +18,7 @@ const Home = () => {
       <HowItWorks />
       <ChatWidget></ChatWidget>
       <WhatClientsSay></WhatClientsSay>
+      <FinalCTA />
     </div>
   );
 };

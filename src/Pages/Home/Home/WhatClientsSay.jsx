@@ -12,7 +12,7 @@ const testimonials = [
     review:
       "AssetVerse reduced asset errors by 30% and improved reporting accuracy. A must-have tool!",
     rating: 5,
-    img: "/review1.jpg",
+    img: "/client11.png",
   },
   {
     name: "Michael Chen",
@@ -21,7 +21,7 @@ const testimonials = [
     review:
       "Tracking and managing our portfolio is effortless now. Secure, fast, and reliable.",
     rating: 5,
-    img: "/review2.jpg",
+    img: "/client2.png",
   },
   {
     name: "Sarah Thompson",
@@ -30,7 +30,7 @@ const testimonials = [
     review:
       "Real-time insights save us hours every week. AssetVerse is essential for asset managers.",
     rating: 5,
-    img: "/review3.jpg",
+    img: "/client3.png",
   },
 ];
 
@@ -66,7 +66,7 @@ const WhatClientsSay = () => {
             <SwiperSlide key={index}>
               <div className="bg-blue-50 rounded-xl shadow-md p-6 flex flex-col items-center text-center h-full max-w-xs mx-auto hover:shadow-xl transition-all duration-300 border border-gray-200 py-5">
                 <div className="flex flex-col items-center mb-4 ">
-                  <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-indigo-100 mb-2">
+                  <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-blue-600  ">
                     <img
                       src={testimonial.img}
                       alt={testimonial.name}
