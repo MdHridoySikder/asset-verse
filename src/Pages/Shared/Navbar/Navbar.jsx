@@ -55,7 +55,7 @@ const Navbar = () => {
           <NavLink
             to="/login"
             className={({ isActive }) =>
-              `flex items-center gap-1 px-4 py-1 border-2 border-blue-700 text-blue-700 font-semibold rounded-sm transition-colors duration-300
+              `flex items-center gap-1 px-4 py-1 border-2 border-gray-200 text-blue-700 font-semibold rounded-sm transition-colors duration-300
               ${isActive ? "bg-blue-700 text-white" : "hover:bg-green-50"}`
             }
           >
@@ -79,12 +79,12 @@ const Navbar = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/challenges" className={linkClass}>
+                <NavLink to="" className={linkClass}>
                   Challenges
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/add-activities" className={linkClass}>
+                <NavLink to="" className={linkClass}>
                   Add Challenges
                 </NavLink>
               </li>
