@@ -3,7 +3,7 @@ import { BarChart2, ShieldCheck, Rocket, Users } from "lucide-react";
 const Welcome = () => {
   return (
     <div>
-      <section className="py-5 pb-12 text-black relative overflow-hidden">
+      <section className="py-5 pb-12 text-black relative ">
         {/* Subtle Background */}
         <div className="absolute inset-0 opacity-20 pointer-events-none">
           <div className="absolute top-0 left-0 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
