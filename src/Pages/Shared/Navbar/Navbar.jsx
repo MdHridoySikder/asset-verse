@@ -38,12 +38,12 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li className="border-2 border-gray-100">
-              <NavLink to="" className={linkClass}>
+              <NavLink to="register" className={linkClass}>
                 <CopyPlus className="w-4 h-4" /> Join as Employee
               </NavLink>
             </li>
             <li className="border-2 border-gray-100">
-              <NavLink to="" className={linkClass}>
+              <NavLink to="manager" className={linkClass}>
                 <CopyPlus className="w-4 h-4" /> Join as HR Manager
               </NavLink>
             </li>
@@ -79,13 +79,13 @@ const Navbar = () => {
                 </NavLink>
               </li>
               <li>
-                <NavLink to="" className={linkClass}>
-                  Challenges
+                <NavLink to="register" className={linkClass}>
+                  Join as Employee
                 </NavLink>
               </li>
               <li>
-                <NavLink to="" className={linkClass}>
-                  Add Challenges
+                <NavLink to="manager" className={linkClass}>
+                  Join as HR Manager
                 </NavLink>
               </li>
               <li>
