@@ -1,10 +1,60 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { useForm } from "react-hook-form";
+import UseAuth from "../../../Hooks/UseAuth";
+import { Link, useLocation, useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Calendar } from "lucide-react";
+import axios from "axios";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const { registerUser, updateUserProfile } = UseAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleRegistation = (data) => {
+    console.log("after register ", data.photo[0]);
+    const profileImg = data.photo[0];
+
+    registerUser(data.email, data.password)
+      .then((result) => {
+        console.log(result.user);
+
+        // Upload image to imgbb
+        const formData = new FormData();
+        formData.append("image", profileImg);
+
+        const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_KEY}`;
+        axios.post(image_API_URL, formData).then((res) => {
+          console.log("after image upload", res.data.data.url);
+
+          // update user profile
+          const userProfile = {
+            displayName: data.name,
+            photoURL: res.data.data.url,
+          };
+          updateUserProfile(userProfile)
+            .then(() => {
+              console.log("profile update done");
+              navigate(location.state || "/");
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="min-h-screen relative flex items-center justify-center bg-blue-50 overflow-hidden px-6">
@@ -48,35 +98,66 @@ const Register = () => {
             Join AssetVerse as an employee
           </p>
 
-          <form className="space-y-5">
+          <form
+            className="space-y-5"
+            onSubmit={handleSubmit(handleRegistation)}
+          >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <input
-                type="text"
-                placeholder="Full name"
-                className="w-full px-5 py-4 rounded-xl bg-white border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
+              {/* Name */}
+              <div>
+                <input
+                  type="text"
+                  {...register("name", { required: true })}
+                  placeholder="Full Name"
+                  className="w-full px-5 py-4 rounded-xl bg-white border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+                {errors.name && (
+                  <p className="text-red-600 text-sm mt-1">Name is required</p>
+                )}
+              </div>
 
+              {/* Date of Birth */}
               <div className="relative">
                 <input
                   type="date"
+                  {...register("dob", { required: true })}
                   className="w-full px-5 py-4 rounded-xl bg-white border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <Calendar
                   size={18}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"
                 />
+                {errors.dob && (
+                  <p className="text-red-600 text-sm mt-1">
+                    Date of birth is required
+                  </p>
+                )}
               </div>
             </div>
 
-            <input
-              type="email"
-              placeholder="Work email"
-              className="w-full px-5 py-4 rounded-xl bg-white border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
+            {/* Email */}
+            <div>
+              <input
+                type="email"
+                {...register("email", { required: true })}
+                placeholder="Work Email"
+                className="w-full px-5 py-4 rounded-xl bg-white border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
+              {errors.email && (
+                <p className="text-red-600 text-sm mt-1">Email is required</p>
+              )}
+            </div>
 
+            {/* Password */}
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
+                {...register("password", {
+                  required: true,
+                  minLength: 6,
+                  pattern:
+                    /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#^()_+]).{8,}$/,
+                })}
                 placeholder="Password"
                 className="w-full px-5 py-4 rounded-xl bg-white border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -87,13 +168,35 @@ const Register = () => {
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
+              {errors.password?.type === "required" && (
+                <p className="text-red-600 text-sm mt-1">
+                  Password is required
+                </p>
+              )}
+              {errors.password?.type === "minLength" && (
+                <p className="text-red-600 text-sm mt-1">
+                  Password must be at least 6 characters
+                </p>
+              )}
+              {errors.password?.type === "pattern" && (
+                <p className="text-red-600 text-sm mt-1">
+                  Password must include uppercase, lowercase, number & special
+                  char
+                </p>
+              )}
             </div>
 
-            {/* photo  input */}
-            <input
-              type="file"
-              className="file-input file-input-ghost w-full  max-auto  text-gray-500 hover:text-blue-600"
-            />
+            {/* Photo Upload */}
+            <div>
+              <input
+                type="file"
+                {...register("photo", { required: true })}
+                className="file-input file-input-ghost w-full text-gray-500 hover:text-blue-600"
+              />
+              {errors.photo && (
+                <p className="text-red-600 text-sm mt-1">Photo is required</p>
+              )}
+            </div>
 
             <button
               type="submit"
@@ -102,6 +205,8 @@ const Register = () => {
               Register
             </button>
           </form>
+
+          <SocialLogin></SocialLogin>
 
           <p className="text-center text-gray-600 mt-8 text-sm">
             Already have an account?{" "}

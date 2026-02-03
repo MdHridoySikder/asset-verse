@@ -1,16 +1,18 @@
-import { CopyPlus, HousePlus } from "lucide-react";
+import { CopyPlus, HousePlus, LayoutDashboard } from "lucide-react";
 import React from "react";
 import { BiPhoneIncoming } from "react-icons/bi";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { PiAddressBookThin } from "react-icons/pi";
 import { Link, NavLink } from "react-router";
+import UseAuth from "../../../Hooks/UseAuth";
 
 const Footer = () => {
+  const { user } = UseAuth();
+
   return (
     <footer className="bg-gradient-to-br from-blue-100 via-blue-50 to-blue-50 text-black pt-12">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-10 px-6">
-        {/* Logo */}
         {/* Logo */}
         <div>
           <div className="flex items-center gap-2">
@@ -29,7 +31,6 @@ const Footer = () => {
             </NavLink>
           </div>
 
-          {/* Small description */}
           <p className="mt-3 text-sm text-gray-600 max-w-xs leading-relaxed">
             A smart asset management platform to track, assign, and manage
             company assets with ease.
@@ -50,16 +51,31 @@ const Footer = () => {
                 <HousePlus className="w-4 h-4" /> Home
               </Link>
             </li>
-            <li>
-              <Link className="flex items-center gap-2 hover:text-blue-600">
-                <CopyPlus className="w-4 h-4" /> Join as Employee
-              </Link>
-            </li>
-            <li>
-              <Link className="flex items-center gap-2 hover:text-blue-600">
-                <CopyPlus className="w-4 h-4" /> Join as HR Manager
-              </Link>
-            </li>
+
+            {/* Show Dashboard if user logged in, else show Join links */}
+            {user ? (
+              <li>
+                <NavLink
+                  to="/dashboard"
+                  className="flex items-center gap-2 hover:text-blue-600"
+                >
+                  <LayoutDashboard className="w-4 h-4" /> Dashboard
+                </NavLink>
+              </li>
+            ) : (
+              <>
+                <li>
+                  <Link className="flex items-center gap-2 hover:text-blue-600">
+                    <CopyPlus className="w-4 h-4" /> Join as Employee
+                  </Link>
+                </li>
+                <li>
+                  <Link className="flex items-center gap-2 hover:text-blue-600">
+                    <CopyPlus className="w-4 h-4" /> Join as HR Manager
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
 

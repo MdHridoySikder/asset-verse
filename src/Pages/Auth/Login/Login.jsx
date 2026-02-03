@@ -1,10 +1,36 @@
 import React, { useState } from "react";
-import { Link } from "react-router";
+import { useForm } from "react-hook-form";
+import UseAuth from "../../../Hooks/UseAuth";
+import { Link, useLocation, useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { HiOutlineShieldCheck } from "react-icons/hi2";
+import SocialLogin from "../SocialLogin/SocialLogin";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+
+  // react-hook-form
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const { logInUser } = UseAuth();
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogin = (data) => {
+    console.log("Login Data:", data);
+    logInUser(data.email, data.password)
+      .then((result) => {
+        console.log(result.user);
+        navigate(location.state || "/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   return (
     <div className="min-h-screen relative flex items-center justify-center bg-blue-50 overflow-hidden px-6">
@@ -50,7 +76,7 @@ const Login = () => {
             Sign in to continue to AssetVerse
           </p>
 
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit(handleLogin)}>
             {/* Email */}
             <div>
               <label className="text-sm text-gray-700 mb-2 block">
@@ -58,9 +84,13 @@ const Login = () => {
               </label>
               <input
                 type="email"
+                {...register("email", { required: true })}
                 placeholder="hr@company.com"
                 className="w-full px-5 py-4 rounded-xl bg-white border border-blue-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
+              {errors.email?.type === "required" && (
+                <p className="text-red-600 mt-1">Email is required</p>
+              )}
             </div>
 
             {/* Password */}
@@ -71,6 +101,7 @@ const Login = () => {
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
+                  {...register("password", { required: true, minLength: 6 })}
                   placeholder="••••••••••"
                   className="w-full px-5 py-4 rounded-xl bg-white border border-blue-300 text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
@@ -82,6 +113,14 @@ const Login = () => {
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
+              {errors.password?.type === "required" && (
+                <p className="text-red-600 mt-1">Password is required</p>
+              )}
+              {errors.password?.type === "minLength" && (
+                <p className="text-red-600 mt-1">
+                  Password must be at least 6 characters
+                </p>
+              )}
               <div className="flex justify-end mt-2">
                 <a href="#" className="text-sm text-blue-600 hover:underline">
                   Forgot password?
@@ -97,7 +136,7 @@ const Login = () => {
               Sign In
             </button>
           </form>
-
+          <SocialLogin></SocialLogin>
           <p className="text-center text-gray-600 mt-8 text-sm">
             New to AssetVerse?{" "}
             <Link
