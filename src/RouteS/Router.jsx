@@ -4,6 +4,9 @@ import Home from "../Pages/Home/Home/Home";
 import NotFound from "../Pages/Shared/NotFund/NotFound";
 import Login from "../Pages/Auth/Login/Login";
 import Register from "../Pages/Auth/Register/Register";
+import PrivateRoute from "./PrivateRoute";
+import DashboardLayout from "../LayOuts/DashboardLayout";
+import AssetList from "../Pages/Dashboard/Hr/AssetList";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +33,20 @@ export const router = createBrowserRouter([
       {
         path: "*",
         Component: NotFound,
+      },
+    ],
+  },
+  {
+    path: "dashboard",
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "asset-list",
+        Component: AssetList,
       },
     ],
   },
