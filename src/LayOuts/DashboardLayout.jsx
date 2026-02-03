@@ -2,22 +2,27 @@ import React from "react";
 import { Link, Outlet, NavLink } from "react-router";
 
 const DashboardLayout = () => {
+  const linkClass = ({ isActive }) =>
+    isActive
+      ? "font-bold text-blue-600 bg-blue-100 rounded-lg"
+      : "text-gray-700 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors";
+
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
 
-      {/* MAIN CONTENT */}
+      {/* main containet*/}
       <div className="drawer-content flex flex-col">
         {/* Page Content */}
         <Outlet />
       </div>
 
-      {/* SIDEBAR */}
+      {/* sidebar */}
       <div className="drawer-side">
         <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
 
         <div className="w-64 min-h-full bg-blue-50 flex flex-col">
-          {/* 🔥 SIDEBAR LOGO (TOP) */}
+          {/*sidebar logo */}
           <NavLink
             to="/"
             className="flex items-center gap-3 px-6 py-5 border-b border-base-300"
@@ -33,33 +38,55 @@ const DashboardLayout = () => {
               AssetVerse
             </span>
           </NavLink>
+          {/* Divider line */}
+          <div className="h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent mx-6 my-2"></div>
 
-          {/* SIDEBAR MENU */}
+          {/* sidebar menu */}
           <ul className="menu p-4 text-base-content gap-1">
-            <p className="text-blue-700 font-bold text-xl">Hr Dashboard</p>
+            <p className="text-blue-700 font-bold text-xl mb-2">Hr Dashboard</p>
+
             <li>
-              <NavLink to="asset-list">Asset List</NavLink>
+              <NavLink to="asset-list" className={linkClass}>
+                Asset List
+              </NavLink>
             </li>
+
             <li>
-              <NavLink to="add-asset">Add Asset</NavLink>
+              <NavLink to="add-asset" className={linkClass}>
+                Add Asset
+              </NavLink>
             </li>
+
             <li>
-              <NavLink
-                to="Allrequests
-"
-              >
+              <NavLink to="all-requests" className={linkClass}>
                 All Requests
               </NavLink>
             </li>
+
             <li>
-              <NavLink to="add-asset">Add Asset</NavLink>
-            </li>
-            <li>
-              <NavLink to="add-asset">Add Asset</NavLink>
+              <NavLink to="my-employee-list" className={linkClass}>
+                My Employee List
+              </NavLink>
             </li>
 
             <li>
-              <NavLink to="/dashboard/settings">⚙️ Settings</NavLink>
+              <NavLink to="upgrade-package" className={linkClass}>
+                Upgrade Package
+              </NavLink>
+            </li>
+
+            <div className="border-b border-blue-300 my-4"></div>
+
+            <li>
+              <NavLink to="my-profile" className={linkClass}>
+                Profile
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink to="/dashboard/settings" className={linkClass}>
+                Settings
+              </NavLink>
             </li>
           </ul>
         </div>
