@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, NavLink } from "react-router";
 import { FaPlus, FaChevronDown } from "react-icons/fa";
 
-import { CopyPlus, HousePlus, LayoutDashboard } from "lucide-react";
+import { CopyPlus, HousePlus, LayoutDashboard, LogOut } from "lucide-react";
 import avatarImg from "/client3.png";
 import UseAuth from "../../../Hooks/UseAuth";
 
@@ -97,7 +97,7 @@ const Navbar = () => {
                     }}
                     className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 transition cursor-pointer text-red-600 font-medium"
                   >
-                    <FaPlus className="w-4 h-4" /> Logout
+                    <LogOut className="text-red-600 w-5 h-5" /> Logout
                   </div>
                 </div>
               )}

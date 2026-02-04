@@ -124,7 +124,7 @@ const DashboardLayout = () => {
             </li>
 
             <li>
-              <NavLink to="/dashboard/settings" className={linkClass}>
+              <NavLink to="settings" className={linkClass}>
                 <IoSettingsOutline className="h-5 w-5" />
                 Settings
               </NavLink>
