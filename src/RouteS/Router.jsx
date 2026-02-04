@@ -12,6 +12,7 @@ import AllRequests from "../Pages/Dashboard/Hr/AllRequests";
 import MyEmployeeList from "../Pages/Dashboard/Hr/MyEmployeeList";
 import UpgradePackage from "../Pages/Dashboard/Hr/UpgradePackage";
 import Profile from "../Pages/Dashboard/Hr/Profile";
+import { ToastContainer } from "react-toastify";
 
 export const router = createBrowserRouter([
   {
@@ -45,6 +46,7 @@ export const router = createBrowserRouter([
     path: "dashboard",
     element: (
       <PrivateRoute>
+        <ToastContainer />
         <DashboardLayout></DashboardLayout>
       </PrivateRoute>
     ),
