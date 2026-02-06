@@ -3,7 +3,7 @@ import React from "react";
 const UpgradePackage = () => {
   return (
     <div>
-      <h1>Upgrade Package</h1>
+      <h1>UpgradePackage</h1>
     </div>
   );
 };

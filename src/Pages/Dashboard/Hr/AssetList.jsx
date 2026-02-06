@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useQuery } from "@tanstack/react-query";
 import UseAuth from "../../../Hooks/UseAuth";
 import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
@@ -18,18 +18,40 @@ const AssetList = () => {
     },
   });
 
-  const handleEdit = (asset) => {
-    Swal.fire("Edit", `You clicked edit for ${asset.productName}`, "info");
-  };
+  const handleEdit = () => {};
 
-  const handleDelete = (asset) => {
-    Swal.fire(
-      "Delete",
-      `You clicked delete for ${asset.productName}`,
-      "warning",
-    );
-  };
+  const handleDelete = async (id) => {
+    console.log(id);
 
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        const res = await axiosSecure.delete(`/assets-collection/${id}`);
+        console.log(res.data);
+
+        if (res.data?.deletedCount > 0) {
+          refetch();
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your asset has been deleted.",
+            icon: "success",
+          });
+        }
+      } catch (error) {
+        console.error(error);
+        Swal.fire("Error!", "Something went wrong!", "error");
+      }
+    }
+  };
   return (
     <div className="p-6 md:p-10 bg-blue-50 min-h-screen">
       <div className="max-w-7xl mx-auto">
@@ -42,7 +64,7 @@ const AssetList = () => {
             Manage all your company assets here. Edit or remove as needed.
           </p>
         </div>
-
+        <p>delete Count: {assets.length}</p>
         {/* Asset Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {assets.map((asset) => (
@@ -72,7 +94,7 @@ const AssetList = () => {
                   Edit
                 </button>
                 <button
-                  onClick={() => handleDelete(asset)}
+                  onClick={() => handleDelete(asset._id)}
                   className="px-5 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl text-sm font-medium"
                 >
                   Delete
