@@ -50,7 +50,7 @@ const Navbar = () => {
               <NavLink to="/register" className={linkClass}>
                 <CopyPlus className="w-4 h-4 inline mr-1" /> Join as Employee
               </NavLink>
-              <NavLink to="/manager" className={linkClass}>
+              <NavLink to="/hrregister" className={linkClass}>
                 <CopyPlus className="w-4 h-4 inline mr-1" /> Join as HR Manager
               </NavLink>
             </>
@@ -145,7 +145,7 @@ const Navbar = () => {
                     </NavLink>
                   </li>
                   <li>
-                    <NavLink to="/manager" className={linkClass}>
+                    <NavLink to="/hrregister" className={linkClass}>
                       Join as HR Manager
                     </NavLink>
                   </li>

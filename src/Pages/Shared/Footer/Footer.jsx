@@ -65,12 +65,18 @@ const Footer = () => {
             ) : (
               <>
                 <li>
-                  <Link className="flex items-center gap-2 hover:text-blue-600">
+                  <Link
+                    to="/register"
+                    className="flex items-center gap-2 hover:text-blue-600"
+                  >
                     <CopyPlus className="w-4 h-4" /> Join as Employee
                   </Link>
                 </li>
                 <li>
-                  <Link className="flex items-center gap-2 hover:text-blue-600">
+                  <Link
+                    to="/hrregister"
+                    className="flex items-center gap-2 hover:text-blue-600"
+                  >
                     <CopyPlus className="w-4 h-4" /> Join as HR Manager
                   </Link>
                 </li>

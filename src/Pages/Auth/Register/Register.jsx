@@ -6,6 +6,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Calendar } from "lucide-react";
 import axios from "axios";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -19,27 +20,37 @@ const Register = () => {
   const { registerUser, updateUserProfile } = UseAuth();
   const location = useLocation();
   const navigate = useNavigate();
+  const axiosSecure = UseAxiosSecure();
 
   const handleRegistation = (data) => {
-    console.log("after register ", data.photo[0]);
     const profileImg = data.photo[0];
 
     registerUser(data.email, data.password)
-      .then((result) => {
-        console.log(result.user);
-
+      .then(() => {
         // Upload image to imgbb
         const formData = new FormData();
         formData.append("image", profileImg);
 
         const image_API_URL = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_KEY}`;
         axios.post(image_API_URL, formData).then((res) => {
-          console.log("after image upload", res.data.data.url);
+          const photoURL = res.data.data.url;
+
+          // create user in the database
+          const userInfo = {
+            email: data.email,
+            displayName: data.name,
+            photoURL: photoURL,
+          };
+          axiosSecure.post("/users", userInfo).then((res) => {
+            if (res.data.insertedId) {
+              console.log("user created in the  database ");
+            }
+          });
 
           // update user profile
           const userProfile = {
             displayName: data.name,
-            photoURL: res.data.data.url,
+            photoURL: photoURL,
           };
           updateUserProfile(userProfile)
             .then(() => {

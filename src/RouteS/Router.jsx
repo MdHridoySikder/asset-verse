@@ -14,6 +14,8 @@ import UpgradePackage from "../Pages/Dashboard/Hr/UpgradePackage";
 import Profile from "../Pages/Dashboard/Hr/Profile";
 
 import Setting from "../Pages/Dashboard/Setting/Setting";
+import HRRegister from "../Pages/Auth/HRRegister";
+import RequestAnAsset from "../Pages/Dashboard/Employee/RequestAnAsset";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +38,10 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         Component: Register,
+      },
+      {
+        path: "/hrregister",
+        Component: HRRegister,
       },
       {
         path: "*",
@@ -78,6 +84,10 @@ export const router = createBrowserRouter([
       {
         path: "settings",
         Component: Setting,
+      },
+      {
+        path: "request-an-asset",
+        Component: RequestAnAsset,
       },
     ],
   },

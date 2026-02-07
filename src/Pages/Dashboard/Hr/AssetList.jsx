@@ -64,7 +64,7 @@ const AssetList = () => {
             Manage all your company assets here. Edit or remove as needed.
           </p>
         </div>
-        <p>delete Count: {assets.length}</p>
+        <p>All Assets Count: {assets.length}</p>
         {/* Asset Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {assets.map((asset) => (
