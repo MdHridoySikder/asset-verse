@@ -10,8 +10,12 @@ import { MdUpdate } from "react-icons/md";
 import { MdWebAsset } from "react-icons/md";
 import { IoGitPullRequestSharp } from "react-icons/io5";
 import { RiTeamFill } from "react-icons/ri";
+import Welcome from "../Pages/Home/Home/Welcome";
+import WelcomePage from "../Pages/Dashboard/WelcomePage";
+import useRole from "../Hooks/useRole";
 
 const DashboardLayout = () => {
+  const { role } = useRole();
   const linkClass = ({ isActive }) =>
     isActive
       ? "font-bold text-blue-600 bg-blue-100 rounded-lg"
@@ -22,8 +26,9 @@ const DashboardLayout = () => {
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
 
       {/* main containet*/}
-      <div className="drawer-content flex flex-col">
+      <div className="drawer-content flex flex-col ">
         {/* Page Content */}
+        <WelcomePage></WelcomePage>
         <Outlet />
       </div>
 
@@ -54,42 +59,50 @@ const DashboardLayout = () => {
           {/* sidebar menu */}
           <ul className="menu p-4 text-base-content gap-1">
             {/* Hr Dashboard */}
-            <p className="text-blue-700 font-bold text-xl mb-2">Hr Dashboard</p>
+            <div>
+              <p className="text-blue-700 font-bold text-xl mb-2">
+                Hr Dashboard
+              </p>
 
-            <li>
-              <NavLink to="asset-list" className={linkClass}>
-                <FaRegListAlt className="h-4 w-4" />
-                Asset List
-              </NavLink>
-            </li>
+              {role === "admin" && (
+                <>
+                  <li>
+                    <NavLink to="asset-list" className={linkClass}>
+                      <FaRegListAlt className="h-4 w-4" />
+                      Asset List
+                    </NavLink>
+                  </li>
+                </>
+              )}
 
-            <li>
-              <NavLink to="add-asset" className={linkClass}>
-                <MdOutlineLibraryAdd className="h-5 w-5" />
-                Add Asset
-              </NavLink>
-            </li>
+              <li>
+                <NavLink to="add-asset" className={linkClass}>
+                  <MdOutlineLibraryAdd className="h-5 w-5" />
+                  Add Asset
+                </NavLink>
+              </li>
 
-            <li>
-              <NavLink to="all-requests" className={linkClass}>
-                <LiaClipboardListSolid className="h-5 w-5" />
-                All Requests
-              </NavLink>
-            </li>
+              <li>
+                <NavLink to="all-requests" className={linkClass}>
+                  <LiaClipboardListSolid className="h-5 w-5" />
+                  All Requests
+                </NavLink>
+              </li>
 
-            <li>
-              <NavLink to="my-employee-list" className={linkClass}>
-                <FaRegAddressCard className="h-5 w-5" />
-                My Employee List
-              </NavLink>
-            </li>
+              <li>
+                <NavLink to="my-employee-list" className={linkClass}>
+                  <FaRegAddressCard className="h-5 w-5" />
+                  My Employee List
+                </NavLink>
+              </li>
 
-            <li>
-              <NavLink to="upgrade-package" className={linkClass}>
-                <MdUpdate className="h-5 w-5" />
-                Upgrade Package
-              </NavLink>
-            </li>
+              <li>
+                <NavLink to="upgrade-package" className={linkClass}>
+                  <MdUpdate className="h-5 w-5" />
+                  Upgrade Package
+                </NavLink>
+              </li>
+            </div>
             {/* employee Dashboard */}
             <p className="text-blue-700 font-bold text-xl mb-2">
               Employee Dashboard

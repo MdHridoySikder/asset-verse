@@ -16,6 +16,7 @@ import Profile from "../Pages/Dashboard/Hr/Profile";
 import Setting from "../Pages/Dashboard/Setting/Setting";
 // import HRRegister from "../Pages/Auth/HRRegister";
 import RequestAnAsset from "../Pages/Dashboard/Employee/RequestAnAsset";
+import AdminRoutes from "./AdminRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -59,7 +60,12 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "asset-list",
-        Component: AssetList,
+
+        element: (
+          <AdminRoutes>
+            <AssetList></AssetList>
+          </AdminRoutes>
+        ),
       },
       {
         path: "add-asset",
@@ -71,7 +77,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "my-employee-list",
-        Component: MyEmployeeList,
+        element: (
+          <AdminRoutes>
+            <MyEmployeeList></MyEmployeeList>
+          </AdminRoutes>
+        ),
       },
       {
         path: "upgrade-package",

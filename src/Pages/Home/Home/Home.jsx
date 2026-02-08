@@ -11,6 +11,7 @@ import FinalCTA from "./FinalCTA";
 import FAQSection from "./FAQSection";
 import Mission from "./Mission";
 import Carousel from "./Carousel";
+import Forbidden from "../../Shared/Forbidden";
 
 const Home = () => {
   return (

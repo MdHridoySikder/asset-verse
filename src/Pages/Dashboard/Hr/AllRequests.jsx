@@ -7,7 +7,7 @@ import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 const AllRequests = () => {
   const axiosSecure = UseAxiosSecure();
   const [loadingId, setLoadingId] = useState(null);
-  const [updatedStatus, setUpdatedStatus] = useState({}); // track status per request
+  const [updatedStatus, setUpdatedStatus] = useState({});
 
   const { data: requests = [], refetch } = useQuery({
     queryKey: ["requests"],
@@ -38,7 +38,7 @@ const AllRequests = () => {
           timer: 1500,
           showConfirmButton: false,
         });
-        // update local status to show in badge and button
+
         setUpdatedStatus((prev) => ({ ...prev, [id]: status }));
       }
     } catch (err) {
