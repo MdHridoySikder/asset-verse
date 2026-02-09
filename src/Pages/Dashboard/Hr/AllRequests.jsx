@@ -39,7 +39,7 @@ const AllRequests = () => {
           showConfirmButton: false,
         });
 
-        refetch(); // 🔥 card remove হবে
+        refetch();
       }
     } catch (err) {
       Swal.fire("Error!", "Something went wrong!", "error");

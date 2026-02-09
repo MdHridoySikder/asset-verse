@@ -39,23 +39,27 @@ const AddAsset = () => {
   };
 
   return (
-    <div className="min-h-screen bg-blue-50 p-6 md:p-10">
+    <div className="min-h-screen bg-blue-50 p-6 md:p-5">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-blue-700 mb-3">
+        <div className="text-center mb-5">
+          <h2
+            className="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight md:leading-snug 
+               bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 bg-clip-text text-transparent 
+               drop-shadow-lg "
+          >
             Add Asset
-          </h1>
-          <p className="text-gray-600 text-lg">
+          </h2>
+          <p className="text-gray-600 text-lg  drop-shadow-lg">
             Add a new asset to your inventory
           </p>
         </div>
 
         {/* Card */}
-        <div className="bg-white border border-blue-200 rounded-3xl p-6 md:p-10 shadow-xl">
-          <h2 className="text-2xl font-bold text-gray-800 mb-6">
-            + Add New Asset
-          </h2>
+        <div className="bg-white border border-blue-200 rounded-3xl p-6 md:p-5 shadow-xl">
+          <p className="text-2xl font-bold bg-gradient-to-r from-blue-500 via-blue-800 to-indigo-600 bg-clip-text text-transparent drop-shadow-lg mb-6 text-center">
+            Add New Asset
+          </p>
 
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -83,7 +87,6 @@ const AddAsset = () => {
                 >
                   <option value="Returnable">Returnable</option>
                   <option value="Non-returnable">Non-returnable</option>
-                  <option value="Consumable">Consumable</option>
                 </select>
               </div>
 
