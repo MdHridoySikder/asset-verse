@@ -1,11 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import UseAxiosSecure from "../../../Hooks/UseAxiosSecure";
-import { FaUserShield } from "react-icons/fa";
+import { FaUserShield, FaPlus } from "react-icons/fa";
 import { FiShieldOff } from "react-icons/fi";
 import Swal from "sweetalert2";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router";
 
-const MyEmployeeList = () => {
+const MyEmployeeList = ({ onAddToTeam, teamMembers = [] }) => {
   const axiosSecure = UseAxiosSecure();
   const [searchText, setSearchText] = useState("");
 
@@ -18,122 +21,148 @@ const MyEmployeeList = () => {
   });
 
   const handleMakeAdmin = (user) => {
-    const roleInfo = { role: "admin" };
-    axiosSecure.patch(`/users/${user._id}/role`, roleInfo).then((res) => {
-      console.log(res.data);
-      if (res.data.modifiedCount) {
-        refetch();
-        Swal.fire({
-          position: "top-end",
-          title: `${user.displayName} Marked as Admin`,
-          showConfirmButton: false,
-          icon: "success",
-          timer: 2000,
-        });
-      }
-    });
+    axiosSecure
+      .patch(`/users/${user._id}/role`, { role: "admin" })
+      .then((res) => {
+        if (res.data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            position: "top-end",
+            title: `${user.displayName} marked as Admin`,
+            showConfirmButton: false,
+            icon: "success",
+            timer: 2000,
+          });
+        }
+      });
   };
+
   const handleRemoveAdmin = (user) => {
-    const roleInfo = { role: "employee" };
-    axiosSecure.patch(`/users/${user._id}/role`, roleInfo).then((res) => {
-      if (res.data.modifiedCount) {
-        refetch();
-        Swal.fire({
-          position: "top-end",
-          title: `${user.displayName} Remove from Admin`,
-          showConfirmButton: false,
-          icon: "success",
-          timer: 2000,
-        });
-      }
-    });
+    axiosSecure
+      .patch(`/users/${user._id}/role`, { role: "employee" })
+      .then((res) => {
+        if (res.data.modifiedCount) {
+          refetch();
+          Swal.fire({
+            position: "top-end",
+            title: `${user.displayName} removed from Admin`,
+            showConfirmButton: false,
+            icon: "success",
+            timer: 2000,
+          });
+        }
+      });
   };
+
+  const availableUsers = users.filter(
+    (user) => !teamMembers.some((member) => member._id === user._id),
+  );
 
   return (
-    <div>
-      <h1>My Employee List: {users.length}</h1>
-      <p>Search Text: {searchText}</p>
-      <label className="input">
-        <svg
-          className="h-[1em] opacity-50"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-        >
-          <g
-            strokeLinejoin="round"
-            strokeLinecap="round"
-            strokeWidth="2.5"
-            fill="none"
-            stroke="currentColor"
-          >
-            <circle cx="11" cy="11" r="8"></circle>
-            <path d="m21 21-4.3-4.3"></path>
-          </g>
-        </svg>
-        <input
-          onChange={(e) => setSearchText(e.target.value)}
-          type="search"
-          className="grow"
-          placeholder="Search Employee"
-        />
-      </label>
+    <div className="bg-white shadow-lg rounded-xl p-6">
+      <ToastContainer />
+      <h2 className="text-2xl font-bold mb-4 text-gray-700">
+        Available Employees
+      </h2>
 
-      <div className="overflow-x-auto">
-        <table className="table">
-          {/* head */}
-          <thead>
+      <div className="flex items-center mb-4">
+        <input
+          type="search"
+          placeholder="Search Employee..."
+          className="flex-grow border border-gray-300 rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+      </div>
+
+      <div className="overflow-x-auto rounded-lg border border-gray-200">
+        <table className="min-w-full divide-y divide-gray-200">
+          <thead className="bg-gray-50">
             <tr>
-              <th>#</th>
-              <th>Users</th>
-              <th>Email</th>
-              <th>Role</th>
-              <th>Admin Action</th>
-              <th> Others Action</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                #
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                User
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                Email
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                Role
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                Admin Action
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                Add to Team
+              </th>
             </tr>
           </thead>
-          <tbody>
-            {users.map((user, index) => (
-              <tr key={user._id || index}>
-                <td>{index + 1}</td>
-                <td>
-                  <div className="flex items-center gap-3">
-                    <div className="avatar">
-                      <div className="mask mask-squircle h-12 w-12">
-                        <img
-                          src={user.photoURL}
-                          alt="Avatar Tailwind CSS Component"
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <div className="font-bold">{user.displayName}</div>
-                    </div>
-                  </div>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {availableUsers.map((user, index) => (
+              <tr
+                key={user._id || index}
+                className="hover:bg-gray-50 transition-colors duration-200"
+              >
+                <td className="px-6 py-4 whitespace-nowrap">{index + 1}</td>
+                <td className="px-6 py-4 flex items-center gap-3">
+                  <img
+                    src={user.photoURL}
+                    alt={user.displayName}
+                    className="w-10 h-10 rounded-full border border-gray-300"
+                  />
+                  <span className="font-medium text-gray-800">
+                    {user.displayName}
+                  </span>
                 </td>
-                <td>{user.email}</td>
-                <td>{user.role}</td>
-                <td>
+                <td className="px-6 py-4 text-gray-600">{user.email}</td>
+                <td className="px-6 py-4">
+                  <span
+                    className={`px-2 py-1 rounded-full text-xs font-semibold ${
+                      user.role === "admin"
+                        ? "bg-green-100 text-green-800"
+                        : "bg-blue-100 text-blue-800"
+                    }`}
+                  >
+                    {user.role}
+                  </span>
+                </td>
+                <td className="px-6 py-4">
                   {user.role === "admin" ? (
                     <button
                       onClick={() => handleRemoveAdmin(user)}
-                      className="btn bg-red-600"
+                      className="bg-red-500 text-white p-2 rounded-full hover:bg-red-600 transition"
                     >
-                      <FiShieldOff className=" h-6 w-6" />
+                      <FiShieldOff className="h-4 w-4" />
                     </button>
                   ) : (
                     <button
                       onClick={() => handleMakeAdmin(user)}
-                      className="btn bg-green-600"
+                      className="bg-green-500 text-white p-2 rounded-full hover:bg-green-600 transition"
                     >
-                      <FaUserShield className=" h-6 w-6" />
+                      <FaUserShield className="h-4 w-4" />
                     </button>
                   )}
                 </td>
-                <th>Action</th>
+                <td className="px-6 py-4">
+                  <Link
+                    to="/dashboard/my-team"
+                    onClick={() => onAddToTeam(user)}
+                    className="bg-blue-500 text-white px-3 py-1 rounded-full flex items-center gap-2 hover:bg-blue-600 transition"
+                  >
+                    <FaPlus className="h-4 w-4" /> Add
+                  </Link>
+                </td>
               </tr>
             ))}
           </tbody>
         </table>
+
+        {availableUsers.length === 0 && (
+          <p className="text-gray-500 text-center py-4">
+            No available employees to add.
+          </p>
+        )}
       </div>
     </div>
   );

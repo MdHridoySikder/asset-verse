@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Mail, User, ShieldCheck, Calendar, X } from "lucide-react";
 import { getAuth, updateProfile } from "firebase/auth";
 import { toast, ToastContainer } from "react-toastify";
+import axios from "axios";
 import "react-toastify/dist/ReactToastify.css";
 import useRole from "../../../Hooks/useRole";
 
@@ -13,30 +14,56 @@ const Profile = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [newName, setNewName] = useState(currentUser?.displayName || "");
   const [name, setName] = useState(currentUser?.displayName || "No Name");
+  const [userData, setUserData] = useState({});
+
+  // 🔹 Save user to backend on login
+  useEffect(() => {
+    if (currentUser?.email) {
+      const user = {
+        name: currentUser.displayName || "No Name",
+        email: currentUser.email,
+        dateOfBirth: "1999-02-09", // example, later dynamic from register/profile
+      };
+
+      axios
+        .post("http://localhost:5000/users", user)
+        .then((res) => setUserData({ ...user, ...res.data }))
+        .catch((err) => console.log(err));
+    }
+  }, [currentUser]);
+
+  const isBirthdayToday = (dob) => {
+    if (!dob) return false;
+    const today = new Date();
+    const birthDate = new Date(dob);
+    return (
+      today.getDate() === birthDate.getDate() &&
+      today.getMonth() === birthDate.getMonth()
+    );
+  };
 
   const user = {
     name: name,
     email: currentUser?.email || "No Email",
     role: role,
-    joinDate: currentUser?.metadata?.creationTime || "N/A",
+    joinDate:
+      currentUser?.metadata?.creationTime || userData.createdAt || "N/A",
     status: currentUser?.emailVerified ? "Verified" : "Unverified",
     avatar: currentUser?.photoURL || "https://i.pravatar.cc/150?img=12",
+    dateOfBirth: userData?.dateOfBirth,
   };
 
-  //  update name
+  // 🔹 Update name
   const handleUpdateProfile = async () => {
     if (!newName.trim()) {
       toast.error("Name cannot be empty");
       return;
     }
-
     try {
       await updateProfile(currentUser, {
         displayName: newName,
       });
-
       setName(newName);
-
       toast.success("Profile updated successfully");
       setIsOpen(false);
     } catch (error) {
@@ -50,6 +77,35 @@ const Profile = () => {
       <ToastContainer position="top-right" autoClose={2000} />
 
       <div className="p-6 space-y-6">
+        {/* 🎂 Birthday Wish */}
+        {isBirthdayToday(user.dateOfBirth) && (
+          <div
+            className="relative overflow-hidden rounded-2xl border
+            bg-gradient-to-br from-indigo-100 via-purple-100 to-blue-100
+            p-5 text-center shadow-md"
+          >
+            <div className="absolute inset-0 bg-white/40 blur-2xl" />
+            <div className="relative">
+              <p className="text-sm font-medium uppercase tracking-wide text-indigo-600">
+                Special Day 🎊
+              </p>
+              <h2 className="mt-1 text-2xl font-bold text-indigo-800">
+                Happy Birthday, {user.name}! 🎂
+              </h2>
+              <p className="mt-2 text-sm text-indigo-700">
+                Another year of being awesome with us. 💙
+              </p>
+              <div
+                className="mt-4 inline-flex items-center gap-2 rounded-full
+                bg-indigo-600 px-4 py-1.5 text-sm font-semibold text-white shadow"
+              >
+                🎉 Celebrate Today
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* 👥 Profile Header */}
         <div className="flex items-center gap-3 mb-6">
           <div className="bg-blue-50 text-primary w-12 h-12 flex items-center justify-center rounded-xl shadow-md">
             <User className="w-6 h-6" />
@@ -80,7 +136,7 @@ const Profile = () => {
           </div>
         </div>
 
-        {/* Button */}
+        {/* Edit Button */}
         <button
           onClick={() => setIsOpen(true)}
           className="px-6 py-2 rounded-xl bg-primary text-white hover:opacity-90"
@@ -88,7 +144,7 @@ const Profile = () => {
           Edit Profile
         </button>
 
-        {/* modal */}
+        {/* Modal */}
         {isOpen && (
           <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
             <div className="bg-white w-full max-w-md rounded-2xl shadow-lg p-6 relative">
@@ -101,7 +157,6 @@ const Profile = () => {
 
               <h2 className="text-xl font-semibold mb-4">Edit Profile</h2>
 
-              {/* name  */}
               <label className="block text-sm mb-1 text-gray-600">
                 Full Name
               </label>
@@ -110,10 +165,9 @@ const Profile = () => {
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
                 className="w-full border rounded-xl px-4 py-2 mb-4
-                focus:outline-none focus:ring-2 focus:ring-primary"
+                  focus:outline-none focus:ring-2 focus:ring-primary"
               />
 
-              {/* email read only  */}
               <label className="block text-sm mb-1 text-gray-600">
                 Email Address
               </label>
@@ -122,11 +176,8 @@ const Profile = () => {
                 value={user.email}
                 disabled
                 className="w-full border rounded-xl px-4 py-2 bg-gray-100
-                cursor-not-allowed text-gray-500"
+                  cursor-not-allowed text-gray-500"
               />
-              <p className="text-xs text-gray-400 mt-1">
-                Email cannot be changed
-              </p>
 
               <div className="mt-6 flex justify-end gap-3">
                 <button
