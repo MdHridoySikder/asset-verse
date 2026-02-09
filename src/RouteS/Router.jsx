@@ -17,6 +17,8 @@ import Setting from "../Pages/Dashboard/Setting/Setting";
 // import HRRegister from "../Pages/Auth/HRRegister";
 import RequestAnAsset from "../Pages/Dashboard/Employee/RequestAnAsset";
 import AdminRoutes from "./AdminRoutes";
+import MyAssets from "../Pages/Dashboard/Employee/MyAssets";
+import MyTeam from "../Pages/Dashboard/Employee/MyTeam";
 
 export const router = createBrowserRouter([
   {
@@ -98,6 +100,14 @@ export const router = createBrowserRouter([
       {
         path: "request-an-asset",
         Component: RequestAnAsset,
+      },
+      {
+        path: "my-assets",
+        Component: MyAssets,
+      },
+      {
+        path: "my-team",
+        Component: MyTeam,
       },
     ],
   },

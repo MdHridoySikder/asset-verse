@@ -7,12 +7,11 @@ import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 const AllRequests = () => {
   const axiosSecure = UseAxiosSecure();
   const [loadingId, setLoadingId] = useState(null);
-  const [updatedStatus, setUpdatedStatus] = useState({});
 
   const { data: requests = [], refetch } = useQuery({
-    queryKey: ["requests"],
+    queryKey: ["requests", "pending"],
     queryFn: async () => {
-      const res = await axiosSecure.get("/requests");
+      const res = await axiosSecure.get("/requests?requestStatus=pending");
       return res.data || [];
     },
   });
@@ -29,6 +28,7 @@ const AllRequests = () => {
       const res = await axiosSecure.patch(`/requests/${id}`, {
         requestStatus: status,
       });
+
       if (res.data.modifiedCount) {
         Swal.fire({
           title: status === "approved" ? "Approved!" : "Rejected!",
@@ -39,7 +39,7 @@ const AllRequests = () => {
           showConfirmButton: false,
         });
 
-        setUpdatedStatus((prev) => ({ ...prev, [id]: status }));
+        refetch(); // 🔥 card remove হবে
       }
     } catch (err) {
       Swal.fire("Error!", "Something went wrong!", "error");
@@ -76,67 +76,60 @@ const AllRequests = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7">
         {requests
           .slice()
-          .sort((a, b) => b._id.localeCompare(a._id)) // newest first
-          .map((r) => {
-            const currentStatus = updatedStatus[r._id] || r.requestStatus;
-            return (
-              <div
-                key={r._id}
-                className="bg-white/80 backdrop-blur-lg border border-gray-200 rounded-2xl p-5 shadow-md hover:shadow-xl transition transform hover:scale-105 flex flex-col justify-between"
-              >
-                {/* Card Content */}
-                <div className="mb-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <h2 className="font-bold text-lg">
-                      {r.assetName || "Unknown Asset"}
-                    </h2>
-                    <span
-                      className={`badge ${getStatusColor(currentStatus)} badge-outline`}
-                    >
-                      {currentStatus || "pending"}
-                    </span>
-                  </div>
-
-                  <p className="text-sm text-gray-600">
-                    👤 Employee: {r.requesterName || "—"}
-                  </p>
-                  <p className="text-sm text-gray-600">
-                    📦 Type: {r.assetType || "—"}
-                  </p>
-                  <p className="text-xs text-gray-400 mt-2">
-                    📝 Note: {r.note || "No note provided"}
-                  </p>
+          .sort((a, b) => b._id.localeCompare(a._id))
+          .map((r) => (
+            <div
+              key={r._id}
+              className="bg-white/80 backdrop-blur-lg border border-gray-200 rounded-2xl p-5 shadow-md hover:shadow-xl transition transform hover:scale-105 flex flex-col justify-between"
+            >
+              {/* Card Content */}
+              <div className="mb-4">
+                <div className="flex justify-between items-center mb-2">
+                  <h2 className="font-bold text-lg">
+                    {r.assetName || "Unknown Asset"}
+                  </h2>
+                  <span
+                    className={`badge ${getStatusColor(
+                      r.requestStatus,
+                    )} badge-outline`}
+                  >
+                    {r.requestStatus || "pending"}
+                  </span>
                 </div>
 
-                {/* Action Buttons inside Card */}
-                {currentStatus === "pending" && (
-                  <div className="flex gap-3 mt-3">
-                    <button
-                      onClick={() => handleAction(r._id, "approved")}
-                      disabled={loadingId === r._id || updatedStatus[r._id]}
-                      className="flex-1 btn btn-success btn-sm gap-2 shadow hover:scale-105 transition disabled:opacity-50"
-                    >
-                      <FaCheckCircle />{" "}
-                      {updatedStatus[r._id] === "approved"
-                        ? "Approved"
-                        : "Approve"}
-                    </button>
-
-                    <button
-                      onClick={() => handleAction(r._id, "rejected")}
-                      disabled={loadingId === r._id || updatedStatus[r._id]}
-                      className="flex-1 btn btn-error btn-sm gap-2 shadow hover:scale-105 transition disabled:opacity-50"
-                    >
-                      <FaTimesCircle />{" "}
-                      {updatedStatus[r._id] === "rejected"
-                        ? "Rejected"
-                        : "Reject"}
-                    </button>
-                  </div>
-                )}
+                <p className="text-sm text-gray-600">
+                  👤 Employee: {r.requesterName || "—"}
+                </p>
+                <p className="text-sm text-gray-600">
+                  📦 Type: {r.assetType || "—"}
+                </p>
+                <p className="text-xs text-gray-400 mt-2">
+                  📝 Note: {r.note || "No note provided"}
+                </p>
               </div>
-            );
-          })}
+
+              {/* Action Buttons */}
+              {r.requestStatus === "pending" && (
+                <div className="flex gap-3 mt-3">
+                  <button
+                    onClick={() => handleAction(r._id, "approved")}
+                    disabled={loadingId === r._id}
+                    className="flex-1 btn btn-success btn-sm gap-2 shadow disabled:opacity-50"
+                  >
+                    <FaCheckCircle /> Approve
+                  </button>
+
+                  <button
+                    onClick={() => handleAction(r._id, "rejected")}
+                    disabled={loadingId === r._id}
+                    className="flex-1 btn btn-error btn-sm gap-2 shadow disabled:opacity-50"
+                  >
+                    <FaTimesCircle /> Reject
+                  </button>
+                </div>
+              )}
+            </div>
+          ))}
       </div>
     </div>
   );

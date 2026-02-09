@@ -3,8 +3,10 @@ import { Mail, User, ShieldCheck, Calendar, X } from "lucide-react";
 import { getAuth, updateProfile } from "firebase/auth";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useRole from "../../../Hooks/useRole";
 
 const Profile = () => {
+  const { role } = useRole();
   const auth = getAuth();
   const currentUser = auth.currentUser;
 
@@ -15,7 +17,7 @@ const Profile = () => {
   const user = {
     name: name,
     email: currentUser?.email || "No Email",
-    role: "HR Manager",
+    role: role,
     joinDate: currentUser?.metadata?.creationTime || "N/A",
     status: currentUser?.emailVerified ? "Verified" : "Unverified",
     avatar: currentUser?.photoURL || "https://i.pravatar.cc/150?img=12",

@@ -5,6 +5,7 @@ import { FaPlus, FaChevronDown } from "react-icons/fa";
 import { CopyPlus, HousePlus, LayoutDashboard, LogOut } from "lucide-react";
 import avatarImg from "/client3.png";
 import UseAuth from "../../../Hooks/UseAuth";
+import { CgProfile } from "react-icons/cg";
 
 const Navbar = () => {
   const { user, logOut } = UseAuth();
@@ -90,6 +91,16 @@ const Navbar = () => {
                     <LayoutDashboard className="w-4 h-4 text-blue-600" />{" "}
                     Dashboard
                   </Link>
+
+                  <Link
+                    to="dashboard/my-profile"
+                    className="flex items-center gap-2 px-4 py-2 hover:bg-gray-100 transition"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <CgProfile className="h-5 w-5" />
+                    Profile
+                  </Link>
+
                   <div
                     onClick={() => {
                       logOut();
