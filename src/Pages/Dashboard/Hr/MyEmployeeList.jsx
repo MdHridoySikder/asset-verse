@@ -59,7 +59,7 @@ const MyEmployeeList = ({ onAddToTeam, teamMembers = [] }) => {
   );
 
   return (
-    <div className="bg-white shadow-lg rounded-xl p-6">
+    <div className="bg-white shadow-lg rounded-xl p-6 border border-b-indigo-700 m-5">
       <ToastContainer />
       <h2 className="text-2xl font-bold mb-4 text-gray-700">
         Available Employees

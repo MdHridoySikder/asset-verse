@@ -8,7 +8,6 @@ const MyTeam = () => {
   const axiosSecure = UseAxiosSecure();
   const [team, setTeam] = useState([]);
 
-  // Load team from backend
   const fetchTeam = async () => {
     try {
       const res = await axiosSecure.get("/team");
@@ -35,7 +34,7 @@ const MyTeam = () => {
       return false;
     }
 
-    if (team.length >= 6) {
+    if (team.length >= 7) {
       Swal.fire({
         icon: "warning",
         title: "Team limit reached",

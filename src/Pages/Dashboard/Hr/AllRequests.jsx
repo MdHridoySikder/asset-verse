@@ -49,38 +49,46 @@ const AllRequests = () => {
   };
 
   return (
-    <div className="p-6 md:p-10 min-h-screen bg-gradient-to-br from-slate-100 to-blue-100">
+    <div className="p-6 md:p-6 min-h-screen bg-gradient-to-br from-slate-100 to-blue-100">
       {/* Header */}
-      <div className="bg-white shadow-md rounded-2xl p-6 mb-8 flex justify-between items-center">
+      <div className="bg-gray-100 shadow-md rounded-2xl border border-b-blue-500 p-6 mb-8 flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">All Asset Requests</h1>
-          <p className="text-gray-500 text-sm">
+          <h2
+            className="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight md:leading-snug 
+               bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 bg-clip-text text-transparent 
+               drop-shadow-lg "
+          >
+            All Asset Requests
+          </h2>
+
+          <p className="text-gray-700 text-lg  drop-shadow-lg">
             Manage employee asset request approvals
           </p>
         </div>
 
-        <div className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-6 py-3 rounded-xl shadow-lg">
-          <p className="text-sm">Total Requests</p>
-          <h2 className="text-2xl font-bold">{requests.length}</h2>
+        <div className="bg-gradient-to-r  from-blue-50 to-blue-50 text-gray-600 px-4 py-2 rounded-xl shadow-lg border border-blue-700 ">
+          <p className="text-2xl font-bold p-1">
+            Total Requests: {requests.length}
+          </p>
         </div>
       </div>
 
       {/* No requests */}
       {requests.length === 0 && (
         <div className="text-center text-gray-500 mt-20">
-          No pending requests found 😴
+          No pending requests found
         </div>
       )}
 
       {/* Request Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7 ">
         {requests
           .slice()
           .sort((a, b) => b._id.localeCompare(a._id))
           .map((r) => (
             <div
               key={r._id}
-              className="bg-white/80 backdrop-blur-lg border border-gray-200 rounded-2xl p-5 shadow-md hover:shadow-xl transition transform hover:scale-105 flex flex-col justify-between"
+              className="bg-white/80 backdrop-blur-lg border border-blue-500 rounded-2xl p-5 shadow-md hover:shadow-xl transition transform hover:scale-105 flex flex-col justify-between "
             >
               {/* Card Content */}
               <div className="mb-4">
@@ -102,6 +110,9 @@ const AllRequests = () => {
                 </p>
                 <p className="text-sm text-gray-600">
                   📦 Type: {r.assetType || "—"}
+                </p>
+                <p className="text-sm text-gray-600">
+                  🔢 Quantity: {r.quantity || 1}
                 </p>
                 <p className="text-xs text-gray-400 mt-2">
                   📝 Note: {r.note || "No note provided"}

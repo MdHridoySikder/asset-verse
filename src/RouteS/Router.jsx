@@ -14,11 +14,12 @@ import UpgradePackage from "../Pages/Dashboard/Hr/UpgradePackage";
 import Profile from "../Pages/Dashboard/Hr/Profile";
 
 import Setting from "../Pages/Dashboard/Setting/Setting";
-// import HRRegister from "../Pages/Auth/HRRegister";
+
 import RequestAnAsset from "../Pages/Dashboard/Employee/RequestAnAsset";
 import AdminRoutes from "./AdminRoutes";
 import MyAssets from "../Pages/Dashboard/Employee/MyAssets";
 import MyTeam from "../Pages/Dashboard/Employee/MyTeam";
+import HRRegister from "../Pages/Auth/HRRegister";
 
 export const router = createBrowserRouter([
   {
@@ -42,10 +43,10 @@ export const router = createBrowserRouter([
         path: "/register",
         Component: Register,
       },
-      // {
-      //   path: "/hrregister",
-      //   Component: HRRegister,
-      // },
+      {
+        path: "/hrregister",
+        Component: HRRegister,
+      },
       {
         path: "*",
         Component: NotFound,

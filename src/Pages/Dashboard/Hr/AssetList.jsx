@@ -77,13 +77,15 @@ const AssetList = () => {
               placeholder="Search asset by name..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full md:w-80 px-5 py-3 rounded-xl border-2 border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+              className="w-full md:w-80 px-5 py-3 rounded-xl border border-blue-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             />
           </div>
 
           {/* Asset Count */}
-          <div className="px-5 py-3 flex bg-gradient-to-r from-blue-400 to-blue-600 text-gray-300 rounded-2xl shadow-lg border-2 border-blue-500 text-2xl font-bold">
-            <p>Total Assets : {assets.length} </p>
+          <div className="bg-gradient-to-r from-blue-50 to-blue-50 text-gray-600 px-6 py-3 rounded-xl shadow-lg border border-blue-700">
+            <p className="text-2xl font-bold">
+              Total Assets : {assets.length}{" "}
+            </p>
           </div>
         </div>
 
