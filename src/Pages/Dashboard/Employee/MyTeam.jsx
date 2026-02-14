@@ -34,7 +34,7 @@ const MyTeam = () => {
       return false;
     }
 
-    if (team.length >= 7) {
+    if (team.length >= 6) {
       Swal.fire({
         icon: "warning",
         title: "Team limit reached",

@@ -20,6 +20,8 @@ import AdminRoutes from "./AdminRoutes";
 import MyAssets from "../Pages/Dashboard/Employee/MyAssets";
 import MyTeam from "../Pages/Dashboard/Employee/MyTeam";
 import HRRegister from "../Pages/Auth/HRRegister";
+import PaymentSuccess from "../Pages/Dashboard/Hr/PaymentSuccess";
+import Paymentcancelled from "../Pages/Dashboard/Hr/Paymentcancelled";
 
 export const router = createBrowserRouter([
   {
@@ -90,6 +92,15 @@ export const router = createBrowserRouter([
         path: "upgrade-package",
         Component: UpgradePackage,
       },
+      {
+        path: "payment-success",
+        Component: PaymentSuccess,
+      },
+      {
+        path: "payment-cancelled",
+        Component: Paymentcancelled,
+      },
+
       {
         path: "my-profile",
         Component: Profile,
