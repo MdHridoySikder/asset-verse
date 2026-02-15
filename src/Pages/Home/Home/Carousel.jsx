@@ -17,7 +17,7 @@ const Carousel = () => {
         "View your assigned assets, submit requests, and track your asset history with complete transparency.",
       img: "https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg",
       btnText: "Join as Employee",
-      link: "/register-employee",
+      link: "/register",
     },
     {
       title: "For HR & Admins",
@@ -25,7 +25,7 @@ const Carousel = () => {
         "Easily manage employees, assign assets, approve requests, and generate detailed reports from a single dashboard.",
       img: "https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg",
       btnText: "Join as HR manager",
-      link: "/register-hr",
+      link: "//hrregister",
     },
   ];
 

@@ -73,7 +73,8 @@ const MyAssets = () => {
                 Type: <span className="font-medium">{asset.assetType}</span>
               </p>
               <p className="text-sm text-gray-600 mb-1">
-                Quantity: <span className="font-medium">{asset.quantity}</span>
+                Quantity: 1
+                <span className="font-medium">{asset.quantity}</span>{" "}
               </p>
               <p className="text-xs text-gray-500">
                 Added: {new Date(asset.dateAdded).toLocaleDateString()}

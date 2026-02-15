@@ -22,6 +22,7 @@ import MyTeam from "../Pages/Dashboard/Employee/MyTeam";
 import HRRegister from "../Pages/Auth/HRRegister";
 import PaymentSuccess from "../Pages/Dashboard/Hr/PaymentSuccess";
 import Paymentcancelled from "../Pages/Dashboard/Hr/Paymentcancelled";
+import HRList from "../Pages/Dashboard/Hr/HRList";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,7 @@ export const router = createBrowserRouter([
         path: "/hrregister",
         Component: HRRegister,
       },
+
       {
         path: "*",
         Component: NotFound,
@@ -74,11 +76,27 @@ export const router = createBrowserRouter([
       },
       {
         path: "add-asset",
-        Component: AddAsset,
+        element: (
+          <AdminRoutes>
+            <AddAsset></AddAsset>
+          </AdminRoutes>
+        ),
       },
       {
         path: "all-requests",
-        Component: AllRequests,
+        element: (
+          <AdminRoutes>
+            <AllRequests></AllRequests>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "hrlist",
+        element: (
+          <AdminRoutes>
+            <HRList></HRList>
+          </AdminRoutes>
+        ),
       },
       {
         path: "my-employee-list",
@@ -90,15 +108,39 @@ export const router = createBrowserRouter([
       },
       {
         path: "upgrade-package",
-        Component: UpgradePackage,
+        element: (
+          <AdminRoutes>
+            <UpgradePackage></UpgradePackage>
+          </AdminRoutes>
+        ),
       },
       {
         path: "payment-success",
-        Component: PaymentSuccess,
+        element: (
+          <AdminRoutes>
+            <PaymentSuccess></PaymentSuccess>
+          </AdminRoutes>
+        ),
       },
       {
         path: "payment-cancelled",
-        Component: Paymentcancelled,
+        element: (
+          <AdminRoutes>
+            <Paymentcancelled></Paymentcancelled>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "my-team",
+        element: (
+          <AdminRoutes>
+            <MyTeam></MyTeam>
+          </AdminRoutes>
+        ),
+      },
+      {
+        path: "my-assets",
+        Component: MyAssets,
       },
 
       {
@@ -112,14 +154,6 @@ export const router = createBrowserRouter([
       {
         path: "request-an-asset",
         Component: RequestAnAsset,
-      },
-      {
-        path: "my-assets",
-        Component: MyAssets,
-      },
-      {
-        path: "my-team",
-        Component: MyTeam,
       },
     ],
   },

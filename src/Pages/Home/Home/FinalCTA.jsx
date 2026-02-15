@@ -30,16 +30,10 @@ const FinalCTA = () => {
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
           <Link
-            to="/join-hr"
-            className="bg-blue-600 text-white font-bold py-4 px-8 rounded-full shadow-lg hover:scale-105 transform transition-all duration-300"
-          >
-            Join as HR Manager
-          </Link>
-          <Link
-            to="/join-employee"
+            to="/register"
             className="bg-transparent border border-blue-600 text-blue-600 font-semibold py-4 px-8 rounded-full hover:bg-blue-600 hover:text-white transform transition-all duration-300"
           >
-            Join as Employee
+            Get Started
           </Link>
         </div>
       </div>

@@ -8,53 +8,49 @@ import Swal from "sweetalert2";
 
 const HRRegister = () => {
   const [showPassword, setShowPassword] = useState(false);
-
-  const { register, handleSubmit } = useForm();
   const { user } = UseAuth();
   const axiosSecure = UseAxiosSecure();
 
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
+
   const handleHRRegister = async (data) => {
-    console.log(data);
-    axiosSecure.post("/hr", data).then((res) => {
-      if (res.data.insertedId) {
-        Swal.fire({
-          title: "Your application  has been submitted.",
-          position: "top-end",
-          icon: "success",
-          showConfirmButton: false,
-          timer: 2000,
-        });
-      }
-    });
     try {
-      // POST request to backend
-      const response = await axiosSecure.post("/hr/register", {
+      const res = await axiosSecure.post("/hr/register", {
         ...data,
         createdBy: user?.email || "unknown",
       });
-      if (response.data.success) {
-        alert("HR Registered Successfully!");
-        reset(); // clear form
+
+      if (res.data.insertedId) {
+        Swal.fire({
+          icon: "success",
+          title: "HR Registered Successfully!",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        reset();
       } else {
-        alert("Registration failed: " + response.data.message);
+        Swal.fire("Error!", res.data.message || "Registration failed", "error");
       }
     } catch (error) {
       console.error(error);
-      alert("Something went wrong during registration!");
+      Swal.fire("Error!", "Something went wrong during registration!", "error");
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-sky-100 to-indigo-100 p-6 relative overflow-hidden">
-      {/* Background Glow */}
       <div className="absolute inset-0 opacity-40 pointer-events-none">
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-300/40 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-indigo-300/40 rounded-full blur-3xl"></div>
       </div>
 
-      {/* Main Container */}
       <div className="w-full max-w-6xl relative z-10 bg-white/80 backdrop-blur-xl border border-blue-200 rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
-        {/* Left Side: Text / Info */}
+        {/* Left Side */}
         <div className="hidden md:flex w-1/2 bg-gradient-to-br from-blue-100 via-sky-200 to-indigo-200 items-center justify-center p-10">
           <div className="text-center">
             <h2 className="text-4xl font-extrabold text-gray-800 mb-4">
@@ -62,25 +58,13 @@ const HRRegister = () => {
             </h2>
             <p className="text-gray-700 text-lg">
               Register as an HR Manager to manage assets, team members, and
-              company resources efficiently. Fill in the form on the right to
-              get started.
+              company resources efficiently.
             </p>
-            <div className="mt-6 text-gray-600 text-sm">
-              Use a strong password and your official email address.
-            </div>
           </div>
         </div>
 
         {/* Right Side: Form */}
         <div className="w-full md:w-1/2 p-8 md:p-10">
-          {/* Logo / Icon */}
-          <div className="flex justify-center mb-8 md:hidden">
-            <div className="w-20 h-20 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-full flex items-center justify-center shadow-2xl">
-              <span className="text-4xl text-white">👔</span>
-            </div>
-          </div>
-
-          {/* Form Card */}
           <div className="bg-white/80 backdrop-blur-xl border border-blue-200 rounded-3xl p-4 md:p-6 shadow-2xl">
             <form
               onSubmit={handleSubmit(handleHRRegister)}
@@ -95,9 +79,16 @@ const HRRegister = () => {
                   <input
                     type="text"
                     placeholder="Enter your full name"
-                    {...register("fullName", { required: true })}
+                    {...register("fullName", {
+                      required: "Full name is required",
+                    })}
                     className="w-full px-5 py-4 bg-blue-50 border border-blue-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
                   />
+                  {errors.fullName && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.fullName.message}
+                    </p>
+                  )}
                 </div>
 
                 <div>
@@ -107,13 +98,20 @@ const HRRegister = () => {
                   <input
                     type="text"
                     placeholder="Acme Corp"
-                    {...register("companyName", { required: true })}
+                    {...register("companyName", {
+                      required: "Company name is required",
+                    })}
                     className="w-full px-5 py-4 bg-blue-50 border border-blue-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
                   />
+                  {errors.companyName && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.companyName.message}
+                    </p>
+                  )}
                 </div>
               </div>
 
-              {/* Date of Birth + Email */}
+              {/* DOB + Email */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -122,7 +120,9 @@ const HRRegister = () => {
                   <div className="relative">
                     <input
                       type="date"
-                      {...register("dob", { required: true })}
+                      {...register("dob", {
+                        required: "Date of Birth is required",
+                      })}
                       className="w-full px-5 py-4 bg-blue-50 border border-blue-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition pr-12"
                     />
                     <Calendar
@@ -130,6 +130,11 @@ const HRRegister = () => {
                       size={20}
                     />
                   </div>
+                  {errors.dob && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.dob.message}
+                    </p>
+                  )}
                 </div>
 
                 <div>
@@ -139,13 +144,24 @@ const HRRegister = () => {
                   <input
                     type="email"
                     placeholder="hr@yourcompany.com"
-                    {...register("email", { required: true })}
+                    {...register("email", {
+                      required: "Email is required",
+                      pattern: {
+                        value: /^\S+@\S+$/i,
+                        message: "Invalid email address",
+                      },
+                    })}
                     className="w-full px-5 py-4 bg-blue-50 border border-blue-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
                   />
+                  {errors.email && (
+                    <p className="text-red-500 text-xs mt-1">
+                      {errors.email.message}
+                    </p>
+                  )}
                 </div>
               </div>
 
-              {/* Company Logo URL + Photo URL */}
+              {/* Company Logo + Photo URL */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -181,7 +197,10 @@ const HRRegister = () => {
                   <input
                     type={showPassword ? "text" : "password"}
                     placeholder="••••••••••••"
-                    {...register("password", { required: true, minLength: 6 })}
+                    {...register("password", {
+                      required: "Password is required",
+                      minLength: { value: 6, message: "Minimum 6 characters" },
+                    })}
                     className="w-full px-5 py-4 bg-blue-50 border border-blue-200 rounded-xl text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition pr-12"
                   />
                   <button
@@ -192,9 +211,11 @@ const HRRegister = () => {
                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                   </button>
                 </div>
-                <p className="text-xs text-gray-500 mt-2">
-                  Must be at least 6 characters
-                </p>
+                {errors.password && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.password.message}
+                  </p>
+                )}
               </div>
 
               {/* Package Select */}
@@ -203,7 +224,9 @@ const HRRegister = () => {
                   Select a Package
                 </label>
                 <select
-                  {...register("package", { required: true })}
+                  {...register("package", {
+                    required: "Please select a package",
+                  })}
                   className="w-full px-5 py-4 bg-blue-50 border border-blue-200 rounded-xl text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
                 >
                   <option value="">Select a package</option>
@@ -211,6 +234,11 @@ const HRRegister = () => {
                   <option value="professional">Professional</option>
                   <option value="enterprise">Enterprise</option>
                 </select>
+                {errors.package && (
+                  <p className="text-red-500 text-xs mt-1">
+                    {errors.package.message}
+                  </p>
+                )}
               </div>
 
               {/* Register Button */}
@@ -222,7 +250,6 @@ const HRRegister = () => {
               </button>
             </form>
 
-            {/* Already have account */}
             <p className="text-center text-gray-600 mt-6 text-sm">
               Already have an account?
               <Link

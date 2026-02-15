@@ -9,6 +9,8 @@ const AssetList = () => {
   const { user } = UseAuth();
   const axiosSecure = UseAxiosSecure();
   const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 12;
 
   const { data: assets = [], refetch } = useQuery({
     queryKey: ["assets-list", user?.email],
@@ -44,8 +46,17 @@ const AssetList = () => {
     }
   };
 
+  // Filter assets based on search
   const filteredAssets = assets.filter((asset) =>
     asset.productName.toLowerCase().includes(search.toLowerCase()),
+  );
+
+  // Pagination logic
+  const totalPages = Math.ceil(filteredAssets.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const paginatedAssets = filteredAssets.slice(
+    startIndex,
+    startIndex + itemsPerPage,
   );
 
   return (
@@ -54,16 +65,13 @@ const AssetList = () => {
         {/* Heading */}
         <div className="text-center mb-2">
           <h2
-            className="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight md:leading-snug 
-               bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 bg-clip-text text-transparent 
-               drop-shadow-lg "
+            className="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight md:leading-snug
+              bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 bg-clip-text text-transparent
+              drop-shadow-lg"
           >
             Company Assets
           </h2>
-          <p
-            className="text-gray-500 
-               drop-shadow-lg"
-          >
+          <p className="text-gray-500 drop-shadow-lg">
             Manage, search, and control all company assets
           </p>
         </div>
@@ -76,7 +84,10 @@ const AssetList = () => {
               type="text"
               placeholder="Search asset by name..."
               value={search}
-              onChange={(e) => setSearch(e.target.value)}
+              onChange={(e) => {
+                setSearch(e.target.value);
+                setCurrentPage(1);
+              }}
               className="w-full md:w-80 px-5 py-3 rounded-xl border border-blue-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
             />
           </div>
@@ -84,28 +95,28 @@ const AssetList = () => {
           {/* Asset Count */}
           <div className="bg-gradient-to-r from-blue-50 to-blue-50 text-gray-600 px-6 py-3 rounded-xl shadow-lg border border-blue-700">
             <p className="text-2xl font-bold">
-              Total Assets : {assets.length}{" "}
+              Total Assets: {filteredAssets.length}
             </p>
           </div>
         </div>
 
         {/* Asset Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredAssets.map((asset) => (
+          {paginatedAssets.map((asset) => (
             <div
               key={asset._id}
               className="group bg-white border border-blue-400 rounded-xl shadow-md hover:shadow-lg transition duration-300 overflow-hidden relative flex flex-col h-full"
             >
-              {/* Asset Type Badge (right top) */}
+              {/* Asset Type Badge */}
               <span className="absolute top-3 right-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-2 py-1 rounded-full text-xs font-semibold shadow-lg z-10">
                 {asset.productType}
               </span>
 
               {/* Image */}
               <img
-                src={asset.imageLink}
-                alt={asset.productName}
                 className="w-full h-44 object-cover rounded-t-2xl"
+                src={`/${asset.imageLink}`}
+                alt={asset.productName}
               />
 
               {/* Content */}
@@ -113,12 +124,10 @@ const AssetList = () => {
                 <h2 className="text-lg font-bold text-gray-800 mb-1">
                   {asset.productName}
                 </h2>
-
                 <p className="text-gray-500 text-sm mb-1">
                   Quantity:{" "}
                   <span className="font-medium">{asset.quantity}</span>
                 </p>
-
                 <p className="text-gray-400 text-xs mb-3">
                   Added on {new Date(asset.dateAdded).toLocaleDateString()}
                 </p>
@@ -128,7 +137,7 @@ const AssetList = () => {
                   <button
                     onClick={() => handleDelete(asset._id)}
                     className="flex items-center gap-1 px-2 py-2 rounded-lg text-sm font-semibold
-                    bg-red-50 text-red-600 hover:bg-red-600 hover:text-white transition-shadow shadow-sm"
+                      bg-red-50 text-red-600 hover:bg-red-600 hover:text-white transition-shadow shadow-sm"
                   >
                     <MdDeleteForever className="h-5 w-5" />
                     Delete
@@ -138,6 +147,25 @@ const AssetList = () => {
             </div>
           ))}
         </div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex justify-center mt-8 gap-2">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+              <button
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                className={`px-4 py-2 rounded-lg border ${
+                  currentPage === page
+                    ? "bg-blue-600 text-white"
+                    : "bg-white text-blue-600 border-blue-400"
+                }`}
+              >
+                {page}
+              </button>
+            ))}
+          </div>
+        )}
 
         {/* Empty State */}
         {filteredAssets.length === 0 && (

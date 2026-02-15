@@ -108,7 +108,7 @@ const UpgradePackage = () => {
               onClick={() => handlePayment(15, "Enterprise")}
               className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 py-4 rounded-full font-bold transition"
             >
-              Contact Sales
+              Get Started
             </button>
           </div>
         </div>

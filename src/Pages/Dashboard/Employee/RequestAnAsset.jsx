@@ -87,9 +87,9 @@ const RequestAnAsset = () => {
               </span>
 
               <img
-                src={asset.productImage || "https://via.placeholder.com/400"}
+                className="w-full h-44 object-cover rounded-t-2xl"
+                src={`/${asset.imageLink}`}
                 alt={asset.productName}
-                className="w-full h-44 object-cover"
               />
 
               <div className="p-4 flex flex-col flex-1">

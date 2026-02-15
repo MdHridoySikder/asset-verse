@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router";
 import { FaCheckCircle, FaCrown } from "react-icons/fa";
-import { BsStars, BsLightningCharge } from "react-icons/bs";
+import { BsLightningCharge } from "react-icons/bs";
 import UseAuth from "../../../Hooks/UseAuth";
 
 const PaymentSuccess = () => {
