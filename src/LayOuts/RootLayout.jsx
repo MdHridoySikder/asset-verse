@@ -5,10 +5,17 @@ import Footer from "../Pages/Shared/Footer/Footer";
 
 const RootLayout = () => {
   return (
-    <div>
-      <Navbar></Navbar>
-      <Outlet></Outlet>
-      <Footer></Footer>
+    <div className="flex flex-col min-h-screen">
+      {/* Navbar fixed on top */}
+      <header className="sticky top-0 z-50">
+        <Navbar />
+      </header>
+
+      {/* Main content scrollable */}
+      <main className="flex-1 overflow-auto">
+        <Outlet />
+        <Footer />
+      </main>
     </div>
   );
 };
