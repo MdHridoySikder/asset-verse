@@ -64,7 +64,7 @@ const Setting = () => {
             </button>
           </div>
 
-          {/* Dark/Light Mode demo */}
+          {/* Dark/Light Mode */}
           <div className="flex items-center justify-between p-4 border rounded-xl">
             <div className="flex items-center gap-3">
               {darkMode ? (

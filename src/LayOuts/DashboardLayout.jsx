@@ -22,14 +22,27 @@ const DashboardLayout = () => {
       ? "font-bold text-blue-600 bg-blue-100 rounded-lg"
       : "text-gray-700 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors";
   return (
-    <div className="drawer lg:drawer-open">
+    <div className="drawer lg:drawer-open bg-blue-50">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
 
       {/* main containet*/}
       <div className="drawer-content flex flex-col ">
-        {/* Page Content */}
-        <WelcomePage></WelcomePage>
-        <Outlet />
+        <div className="drawer-content flex flex-col ">
+          {/* Mobile Menu Button */}
+
+          <div className="flex items-center gap-5">
+            <div className="lg:hidden p-4">
+              <label
+                htmlFor="my-drawer-4"
+                className="btn btn-outline btn-primary drawer-button"
+              >
+                ☰ Menu
+              </label>
+            </div>
+          </div>
+
+          <Outlet />
+        </div>
       </div>
 
       {/* sidebar */}
@@ -43,7 +56,7 @@ const DashboardLayout = () => {
             className="flex items-center gap-3 px-6 py-5 border-b border-base-300"
           >
             {/* Glass-style logo */}
-            <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-green-700 shadow-lg bg-white/20 backdrop-blur-sm">
+            <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-blue-700 shadow-lg bg-white/20 backdrop-blur-sm">
               <img
                 src="/Logo.png"
                 alt="AssetVerse Logo"

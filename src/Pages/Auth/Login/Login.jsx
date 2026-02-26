@@ -41,10 +41,10 @@ const Login = () => {
       <div className="relative z-10 w-full max-w-6xl grid lg:grid-cols-2 gap-14 items-center">
         {/* Left Content */}
         <div className="space-y-8 text-gray-900">
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 border border-blue-200 text-blue-700 text-sm font-medium">
+          {/* <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 border border-blue-200 text-blue-700 text-sm font-medium">
             <HiOutlineShieldCheck className="text-lg" />
             Enterprise-grade Security
-          </span>
+          </span> */}
 
           <h1 className="text-5xl md:text-7xl font-extrabold leading-tight">
             Manage Assets <br />
