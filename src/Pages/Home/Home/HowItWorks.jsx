@@ -35,13 +35,13 @@ const HowItWorks = () => {
         {/* Title */}
         <div className="text-center mb-16">
           <h2
-            className="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight md:leading-snug 
-               bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 bg-clip-text text-transparent 
-               drop-shadow-lg mb-"
+            className="sm:text-4xl heading font-extrabold tracking-tight leading-tight md:leading-snug 
+               bg-primary bg-clip-text text-transparent 
+               drop-shadow-lg mb-2"
           >
             How AssetVerse Works
           </h2>
-          <p className="text-gray-700 text-xm md:text-xl max-w-4xl mx-auto leading-relaxed drop-shadow-lg ">
+          <p className="text-secondary sub-heading md:text-base max-w-4xl mx-auto leading-relaxed drop-shadow-lg ">
             A smooth and intuitive step-by-step process to simplify asset
             management.
           </p>
@@ -55,17 +55,17 @@ const HowItWorks = () => {
               className="flex flex-col items-center text-center md:w-1/4 px-4"
             >
               {/* Icon Bubble */}
-              <div className="w-16 h-16 flex items-center justify-center rounded-full border-2 border-b-blue-500 bg-blue-100 text-blue-600 text-2xl mb-4 relative z-10 transform transition-transform duration-300 hover:scale-110">
+              <div className="w-16 h-16 flex items-center justify-center rounded-full border-2 border-b-blue-500 bg-blue-100 text-blue-600 text-2xl mb-4 relative z-10 transform group hover:border-blue-400 hover:shadow-2xl hover:shadow-blue-300/30 transition-all duration-300 ">
                 {step.icon}
               </div>
 
               {/* Step Title */}
-              <h3 className="text-lg md:text-xl font-semibold text-blue-600 mb-2">
+              <h3 className="text-lg md:text-xl font-semibold text-primary mb-2">
                 {step.title}
               </h3>
 
               {/* Step Description */}
-              <p className="text-gray-700 text-sm md:text-base">
+              <p className="text-secondary text-sm md:text-base">
                 {step.description}
               </p>
 

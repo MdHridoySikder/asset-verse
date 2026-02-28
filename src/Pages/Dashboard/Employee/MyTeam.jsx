@@ -125,11 +125,11 @@ const MyTeam = () => {
           return (
             <div
               key={user._id}
-              className={`relative flex flex-wrap items-center p-6 rounded-2xl shadow-lg transition
+              className={`relative flex flex-wrap items-center p-6 gap-3 rounded-2xl shadow-lg transition
               ${
                 isAdmin
                   ? "lg:col-span-3 bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 text-white"
-                  : "bg-white border hover:shadow-2xl"
+                  : " border hover:shadow-2xl"
               }`}
             >
               {/* admin */}
@@ -149,7 +149,7 @@ const MyTeam = () => {
               />
 
               {/* Info */}
-              <div className="ml-6 flex-1 min-w-[200px]">
+              <div className="ml-2 mt-2 flex-1 min-w-[200px]">
                 <h3 className="text-xl font-bold">{user.displayName}</h3>
                 <p
                   className={`text-sm font-semibold uppercase tracking-widest ${
@@ -160,7 +160,7 @@ const MyTeam = () => {
                 </p>
 
                 {isAdmin && (
-                  <p className="mt-2 text-sm text-white/80">
+                  <p className="mt-2  text-sm text-white/80">
                     Full access • Asset control • Team owner
                   </p>
                 )}
@@ -172,7 +172,7 @@ const MyTeam = () => {
                   handleRemoveFromTeam(user._id, user.displayName, user.role)
                 }
                 disabled={isAdmin}
-                className={`mt-4 md:mt-0 px-5 py-2 rounded-lg text-sm font-semibold transition shrink-0
+                className={`mt-4 ml-2 md:mt-0 px-5 py-2 rounded-lg text-sm font-semibold transition shrink-0
                 ${
                   isAdmin
                     ? "bg-black/30 text-white cursor-not-allowed"
@@ -188,8 +188,8 @@ const MyTeam = () => {
 
       {/* Team Limit */}
       {team.length >= 6 && (
-        <div className="mt-6 p-4 bg-red-50 border border-red-300 rounded-xl flex items-center justify-between shadow-md">
-          <span className="text-red-800 font-medium">
+        <div className="mt-6 p-4 hover:bg-[var(--color-tertiary)]  border border-red-800 rounded-xl flex items-center justify-between shadow-md">
+          <span className="text-red-800 font-medium ">
             Team limit reached! Payment required before adding more.
           </span>
           <Link

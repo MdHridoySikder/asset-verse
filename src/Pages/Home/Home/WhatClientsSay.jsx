@@ -1,8 +1,5 @@
 import React from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
 import { Star } from "lucide-react";
-import "swiper/css";
 
 const testimonials = [
   {
@@ -32,76 +29,75 @@ const testimonials = [
     rating: 5,
     img: "/client3.png",
   },
+  {
+    name: "David Williams",
+    position: "Senior Portfolio Manager",
+    company: "Capital Growth Inc",
+    review:
+      "The automation and analytics features transformed the way we manage assets. Highly recommended!",
+    rating: 5,
+    img: "/client4.png",
+  },
 ];
 
 const WhatClientsSay = () => {
   return (
-    <section className="py-16  text-black">
+    <section className="py-16 text-black">
       <div className="max-w-7xl mx-auto px-6">
         {/* Title */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent mb-4">
+          <h2 className="sm:text-4xl heading font-extrabold bg-primary bg-clip-text text-transparent drop-shadow-lg mb-2">
             What Our Clients Say
           </h2>
-          <p className="text-gray-700 text-lg md:text-xl">
+          <p className="text-secondary sub-heading">
             Don’t just take our word for it — hear from some of our satisfied
             clients
           </p>
         </div>
 
-        {/* Testimonials Slider */}
-        <Swiper
-          modules={[Autoplay]}
-          autoplay={{ delay: 100, disableOnInteraction: false }}
-          spaceBetween={24}
-          slidesPerView={3}
-          centeredSlides={true}
-          breakpoints={{
-            640: { slidesPerView: 1, centeredSlides: true },
-            768: { slidesPerView: 2, centeredSlides: false },
-            1024: { slidesPerView: 3, centeredSlides: false },
-          }}
-        >
+        {/* Grid Layout */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {testimonials.map((testimonial, index) => (
-            <SwiperSlide key={index}>
-              <div className="bg-blue-50 rounded-xl shadow-md p-6 flex flex-col items-center text-center h-full max-w-xs mx-auto hover:shadow-xl transition-all duration-300 border border-gray-200 py-5">
-                <div className="flex flex-col items-center mb-4 ">
-                  <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-blue-600  ">
-                    <img
-                      src={testimonial.img}
-                      alt={testimonial.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <h4 className="text-base font-bold text-indigo-700">
-                    {testimonial.name}
-                  </h4>
-                  <p className="text-gray-500 text-xs">
-                    {testimonial.position}
-                  </p>
+            <div
+              key={index}
+              className="rounded-xl shadow-md p-6 flex flex-col items-center text-center border border-gray-200 hover:border-blue-400 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-300/30 "
+            >
+              <div className="flex flex-col items-center mb-4">
+                <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-blue-600">
+                  <img
+                    src={testimonial.img}
+                    alt={testimonial.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-
-                <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      size={18}
-                      className={`${
-                        i < testimonial.rating
-                          ? "text-yellow-400 fill-yellow-400"
-                          : "text-gray-300"
-                      }`}
-                    />
-                  ))}
-                </div>
-
-                <p className="text-gray-700 text-sm leading-relaxed flex-grow">
-                  "{testimonial.review}"
+                <h4 className="text-base font-bold text-primary mt-3">
+                  {testimonial.name}
+                </h4>
+                <p className="text-secondary text-xs mt-0.5">
+                  {testimonial.position}
                 </p>
               </div>
-            </SwiperSlide>
+
+              <div className="flex mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    size={18}
+                    className={`${
+                      i < testimonial.rating
+                        ? "text-yellow-400 fill-yellow-400"
+                        : "text-gray-300"
+                    }`}
+                  />
+                ))}
+              </div>
+
+              <p className="text-secondary text-sm leading-relaxed flex-grow">
+                "{testimonial.review}"
+              </p>
+            </div>
           ))}
-        </Swiper>
+        </div>
       </div>
     </section>
   );

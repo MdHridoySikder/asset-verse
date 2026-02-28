@@ -54,8 +54,8 @@ const ReturnableChart = ({ assets = [] }) => {
     <div className="w-full h-96 p-4 relative">
       <h2
         className="text-center text-3xl font-extrabold tracking-tight leading-tight md:leading-snug 
-               bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 bg-clip-text text-transparent 
-               drop-shadow-lg "
+               bg-primary bg-clip-text text-transparent 
+               drop-shadow-lg mb-2 "
       >
         Asset Type Distribution
       </h2>

@@ -11,14 +11,22 @@ const Footer = () => {
   const { user } = UseAuth();
 
   return (
-    <footer className="bg-gradient-to-br from-blue-100 via-blue-50 to-blue-50 text-black pt-12">
+    <footer className="bg--to-br from-blue-100 via-blue-50 to-blue-50 text-black pt-12 relative">
+      {/* Unique Top Border */}
+      <div
+        className="border-t border-blue-200 mb-4 text-center text-sm text-secondary"
+        style={{
+          background: "linear-gradient(to right, #888888, #ffffff)",
+        }}
+      ></div>
+
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-10 px-6">
         {/* Logo */}
         <div>
           <div className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-green-700">
+            <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-blue-700">
               <img
-                src="/Logo.png"
+                src="/Logo2.png"
                 alt="AssetVerse"
                 className="w-full h-full object-cover"
               />
@@ -31,7 +39,7 @@ const Footer = () => {
             </NavLink>
           </div>
 
-          <p className="mt-3 text-sm text-gray-600 max-w-xs leading-relaxed">
+          <p className="mt-3 text-sm text-secondary max-w-xs leading-relaxed">
             A smart asset management platform to track, assign, and manage
             company assets with ease.
           </p>
@@ -39,10 +47,10 @@ const Footer = () => {
 
         {/* Quick Links */}
         <div>
-          <h4 className="text-lg font-extrabold text-blue-500 mb-5">
+          <h4 className="text-lg font-extrabold text-primary mb-5">
             Quick Links
           </h4>
-          <ul className="space-y-3 text-sm">
+          <ul className="space-y-3 text-sm text-secondary">
             <li>
               <Link
                 to="/"
@@ -52,7 +60,6 @@ const Footer = () => {
               </Link>
             </li>
 
-            {/* Show Dashboard if user logged in, else show Join links */}
             {user ? (
               <li>
                 <NavLink
@@ -88,24 +95,24 @@ const Footer = () => {
         {/* Resources */}
         <div>
           <h4 className="text-lg font-bold text-blue-600 mb-5">Resources</h4>
-          <ul className="space-y-3 text-sm">
+          <ul className="space-y-3 text-sm text-secondary ">
             <li>
-              <Link to="/about" className="hover:text-blue-600">
+              <Link to="/AboutUs" className="hover:text-blue-600">
                 About Us
               </Link>
             </li>
             <li>
-              <Link to="/pricing" className="hover:text-blue-600">
+              <Link to="/package" className="hover:text-blue-600">
                 Pricing
               </Link>
             </li>
             <li>
-              <Link to="/faq" className="hover:text-blue-600">
+              <Link to="/fAQSection" className="hover:text-blue-600">
                 FAQs
               </Link>
             </li>
             <li>
-              <Link to="/contact" className="hover:text-blue-600">
+              <Link to="/chatWidget" className="hover:text-blue-600">
                 Contact Support
               </Link>
             </li>
@@ -114,7 +121,7 @@ const Footer = () => {
 
         {/* Social */}
         <div>
-          <h4 className="text-lg font-extrabold text-blue-500 mb-5">
+          <h4 className="text-lg font-extrabold text-primary mb-5">
             Follow Us
           </h4>
           <div className="flex gap-5 text-xl">
@@ -132,17 +139,17 @@ const Footer = () => {
 
         {/* Contact */}
         <div>
-          <h4 className="text-lg font-extrabold text-blue-500 mb-5">
+          <h4 className="text-lg font-extrabold text-primary mb-5">
             Contact Info
           </h4>
-          <ul className="space-y-2 text-sm">
-            <li className="flex items-center gap-3">
+          <ul className="space-y-2 text-sm text-secondary ">
+            <li className="flex items-center gap-3 hover:text-blue-600">
               <MdEmail /> assetverse@gmail.com
             </li>
-            <li className="flex items-center gap-3">
+            <li className="flex items-center gap-3 hover:text-blue-600">
               <BiPhoneIncoming /> +880 1234-567890
             </li>
-            <li className="flex items-center gap-3">
+            <li className="flex items-center gap-3 hover:text-blue-600">
               <PiAddressBookThin /> Chattogram, Bangladesh
             </li>
           </ul>
@@ -150,7 +157,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom */}
-      <div className="border-t border-blue-200 mt-12 py-4 text-center text-sm text-gray-600">
+      <div className="border-t border-blue-200 mt-12 py-4 text-center text-sm text-secondary">
         © 2026 <span className="font-semibold">AssetVerse</span> | All rights
         reserved.
       </div>

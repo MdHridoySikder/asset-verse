@@ -107,14 +107,14 @@ const Profile = () => {
 
         {/* 👥 Profile Header */}
         <div className="flex items-center gap-3 mb-6">
-          <div className="bg-blue-50 text-primary w-12 h-12 flex items-center justify-center rounded-xl shadow-md">
+          <div className=" border border-primary text-primary w-12 h-12 flex items-center justify-center rounded-xl shadow-md">
             <User className="w-6 h-6" />
           </div>
-          <h1 className="text-3xl font-bold text-blue-800 ">My Profile</h1>
+          <h1 className="heading-db font-bold text-primary ">My Profile</h1>
         </div>
 
         {/* Profile Card */}
-        <div className="bg-white rounded-2xl shadow-md p-6 flex flex-col lg:flex-row gap-6">
+        <div className="border border-secondary rounded-2xl shadow-md p-6 flex flex-col lg:flex-row gap-6">
           <div className="flex flex-col items-center w-full lg:w-1/4 border-r lg:pr-6">
             <img
               src={user.avatar}

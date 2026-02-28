@@ -49,25 +49,24 @@ const AllRequests = () => {
   };
 
   return (
-    <div className="p-6 md:p-6 min-h-screen bg-gradient-to-br from-slate-100 to-blue-100">
+    <div className="p-6 md:p-8 lg:p-10 min-h-screen">
       {/* Header */}
-      <div className="bg-gray-100 shadow-md rounded-2xl border border-b-blue-500 p-6 mb-8 flex justify-between items-center">
-        <div>
+      <div className="shadow-md rounded-2xl border border-b-blue-500 p-6 mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0">
+        <div className="flex-1">
           <h2
-            className="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight md:leading-snug 
-               bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 bg-clip-text text-transparent 
-               drop-shadow-lg "
+            className="sm:text-3xl md:text-4xl heading-db font-extrabold tracking-tight leading-tight 
+               bg-primary bg-clip-text text-transparent drop-shadow-lg"
           >
             All Asset Requests
           </h2>
 
-          <p className="text-gray-700 text-lg  drop-shadow-lg">
+          <p className="text-secondary sub-heading drop-shadow-lg mt-2 md:mt-1">
             Manage employee asset request approvals
           </p>
         </div>
 
-        <div className="bg-gradient-to-r  from-blue-50 to-blue-50 text-gray-600 px-4 py-2 rounded-xl shadow-lg border border-blue-700 ">
-          <p className="text-2xl font-bold p-1">
+        <div className="bg-gradient-to-r from-blue-50 to-blue-50 text-gray-600 px-4 py-2 rounded-xl shadow-lg border border-blue-700 mt-4 md:mt-0">
+          <p className="text-lg md:text-2xl font-bold p-1">
             Total Requests: {requests.length}
           </p>
         </div>
@@ -75,25 +74,25 @@ const AllRequests = () => {
 
       {/* No requests */}
       {requests.length === 0 && (
-        <div className="text-center text-gray-500 mt-20">
+        <div className="text-center text-gray-500 mt-20 text-base md:text-lg">
           No pending requests found
         </div>
       )}
 
       {/* Request Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7 ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 xl:gap-10">
         {requests
           .slice()
           .sort((a, b) => b._id.localeCompare(a._id))
           .map((r) => (
             <div
               key={r._id}
-              className="bg-white/80 backdrop-blur-lg border border-blue-500 rounded-2xl p-5 shadow-md hover:shadow-xl transition transform hover:scale-105 flex flex-col justify-between "
+              className="bg- backdrop-blur-lg border border-blue-500 rounded-2xl p-5 shadow-md hover:shadow-xl transform hover:scale-105 transition-all hover:border-blue-900 hover:shadow-blue-100/10 duration-300 flex flex-col justify-between relative h-full"
             >
               {/* Card Content */}
               <div className="mb-4">
-                <div className="flex justify-between items-center mb-2">
-                  <h2 className="font-bold text-lg">
+                <div className="flex justify-between items-center mb-2 flex-wrap gap-2">
+                  <h2 className="font-bold text-lg md:text-xl">
                     {r.assetName || "Unknown Asset"}
                   </h2>
                   <span
@@ -105,27 +104,27 @@ const AllRequests = () => {
                   </span>
                 </div>
 
-                <p className="text-sm text-gray-600">
+                <p className="text-sm md:text-base text-gray-600">
                   👤 Employee: {r.requesterName || "—"}
                 </p>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm md:text-base text-gray-600">
                   📦 Type: {r.assetType || "—"}
                 </p>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm md:text-base text-gray-600">
                   🔢 Quantity: {r.quantity || 1}
                 </p>
-                <p className="text-xs text-gray-400 mt-2">
+                <p className="text-xs md:text-sm text-gray-400 mt-2 break-words">
                   📝 Note: {r.note || "No note provided"}
                 </p>
               </div>
 
               {/* Action Buttons */}
               {r.requestStatus === "pending" && (
-                <div className="flex gap-3 mt-3">
+                <div className="flex flex-col sm:flex-row gap-3 mt-3">
                   <button
                     onClick={() => handleAction(r._id, "approved")}
                     disabled={loadingId === r._id}
-                    className="flex-1 btn btn-success btn-sm gap-2 shadow disabled:opacity-50"
+                    className="flex-1 btn btn-success btn-sm md:btn-md gap-2 shadow disabled:opacity-50"
                   >
                     <FaCheckCircle /> Approve
                   </button>
@@ -133,7 +132,7 @@ const AllRequests = () => {
                   <button
                     onClick={() => handleAction(r._id, "rejected")}
                     disabled={loadingId === r._id}
-                    className="flex-1 btn btn-error btn-sm gap-2 shadow disabled:opacity-50"
+                    className="flex-1 btn btn-error btn-sm md:btn-md gap-2 shadow disabled:opacity-50"
                   >
                     <FaTimesCircle /> Reject
                   </button>

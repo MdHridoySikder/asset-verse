@@ -12,7 +12,6 @@ import { IoGitPullRequestSharp } from "react-icons/io5";
 import { RiTeamFill } from "react-icons/ri";
 import { SiGoogleadmob } from "react-icons/si";
 
-import WelcomePage from "../Pages/Dashboard/WelcomePage";
 import useRole from "../Hooks/useRole";
 
 const DashboardLayout = () => {
@@ -20,9 +19,9 @@ const DashboardLayout = () => {
   const linkClass = ({ isActive }) =>
     isActive
       ? "font-bold text-blue-600 bg-blue-100 rounded-lg"
-      : "text-gray-700 hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors";
+      : "text-secondary hover:text-blue-500 hover:bg-blue-50 rounded-lg transition-colors";
   return (
-    <div className="drawer lg:drawer-open bg-blue-50">
+    <div className="drawer lg:drawer-open ">
       <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
 
       {/* main containet*/}
@@ -49,7 +48,7 @@ const DashboardLayout = () => {
       <div className="drawer-side">
         <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
 
-        <div className="w-64 min-h-full bg-blue-50 flex flex-col">
+        <div className="w-64 min-h-full  flex flex-col bg-base-100">
           {/*sidebar logo */}
           <NavLink
             to="/"
@@ -58,7 +57,7 @@ const DashboardLayout = () => {
             {/* Glass-style logo */}
             <div className="w-12 h-12 rounded-full overflow-hidden border-2 border-blue-700 shadow-lg bg-white/20 backdrop-blur-sm">
               <img
-                src="/Logo.png"
+                src="/Logo2.png"
                 alt="AssetVerse Logo"
                 className="w-full h-full object-cover opacity-80"
               />
@@ -71,9 +70,9 @@ const DashboardLayout = () => {
           <div className="h-px bg-gradient-to-r from-transparent via-blue-400 to-transparent mx-6 my-2"></div>
 
           {/* sidebar menu */}
-          <ul className="menu p-4 text-base-content gap-1">
+          <ul className="menu p-4 text-base-content gap-1.5">
             {/* Hr Dashboard */}
-            <div>
+            <div className="flex flex-col gap-1.5">
               {role === "admin" && (
                 <>
                   <li>

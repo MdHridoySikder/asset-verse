@@ -60,18 +60,18 @@ const AssetList = () => {
   );
 
   return (
-    <div className="p-6 md:p-5 bg-blue-50 min-h-screen">
+    <div className="p-6 md:p-5  min-h-screen">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <div className="text-center mb-2">
           <h2
-            className="text-4xl md:text-5xl font-extrabold tracking-tight leading-tight md:leading-snug
-              bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 bg-clip-text text-transparent
+            className="sm:text-4xl heading-db font-extrabold tracking-tight leading-tight md:leading-snug
+              bg-primary bg-clip-text text-transparent
               drop-shadow-lg"
           >
             Company Assets
           </h2>
-          <p className="text-gray-500 drop-shadow-lg">
+          <p className="text-secondary drop-shadow-lg">
             Manage, search, and control all company assets
           </p>
         </div>
@@ -101,11 +101,11 @@ const AssetList = () => {
         </div>
 
         {/* Asset Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
           {paginatedAssets.map((asset) => (
             <div
               key={asset._id}
-              className="group bg-white border border-blue-400 rounded-xl shadow-md hover:shadow-lg transition duration-300 overflow-hidden relative flex flex-col h-full"
+              className="group  border border-blue-400 rounded-xl shadow-md hover:border-blue-800 transition-all hover:shadow-2xl hover:shadow-blue-200/30  duration-300 overflow-hidden relative flex flex-col h-full"
             >
               {/* Asset Type Badge */}
               <span className="absolute top-3 right-3 bg-gradient-to-r from-purple-500 to-indigo-500 text-white px-2 py-1 rounded-full text-xs font-semibold shadow-lg z-10">
@@ -121,7 +121,7 @@ const AssetList = () => {
 
               {/* Content */}
               <div className="p-4 flex flex-col flex-1">
-                <h2 className="text-lg font-bold text-gray-800 mb-1">
+                <h2 className="text-lg font-bold text-primary mb-1">
                   {asset.productName}
                 </h2>
                 <p className="text-gray-500 text-sm mb-1">

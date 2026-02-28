@@ -68,32 +68,32 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen relative flex items-center justify-center bg-blue-50 overflow-hidden px-6">
+    <div className="min-h-screen relative py-15 flex items-center justify-center  overflow-hidden px-6">
       <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-blue-400/30 rounded-full blur-[120px]" />
       <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-indigo-400/30 rounded-full blur-[120px]" />
 
       <div className="relative z-10 w-full max-w-6xl grid lg:grid-cols-2 gap-14 items-center">
         {/* LEFT INFO */}
-        <div className="space-y-6 text-gray-900">
+        <div className="space-y-6 text-primary">
           <h1 className="text-5xl md:text-6xl font-extrabold">
             Create Employee <br /> Account
           </h1>
 
-          <p className="text-gray-600 max-w-xl text-lg">
+          <p className="text-secondary max-w-xl text-lg">
             Register with your work email to access the employee dashboard and
             manage company assets securely.
           </p>
 
-          <div className="bg-white/80 backdrop-blur-md border border-blue-200 rounded-2xl p-6 shadow space-y-3">
+          <div className="bg- backdrop-blur-md border border-blue-200 rounded-2xl p-6 shadow space-y-3">
             <div>
-              <p className="text-sm font-medium">Account type</p>
-              <p className="text-sm text-gray-500">Employee</p>
-              <p className="text-xs text-gray-400">
+              <p className="text-sm font-medium text-primary">Account type</p>
+              <p className="text-sm text-secondary">Employee</p>
+              <p className="text-xs text-secondary mt-1">
                 Role will be set automatically
               </p>
             </div>
 
-            <ul className="text-xs text-gray-500 list-disc list-inside space-y-1">
+            <ul className="text-xs text-secondary list-disc list-inside space-y-1">
               <li>Use a strong password</li>
               <li>Date of birth is required</li>
             </ul>
@@ -101,11 +101,11 @@ const Register = () => {
         </div>
 
         {/* REGISTER CARD */}
-        <div className="bg-white/80 backdrop-blur-2xl border border-blue-200 rounded-3xl p-8 md:p-10 shadow-2xl">
-          <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">
+        <div className=" backdrop-blur-2xl border border-blue-200 rounded-3xl p-8 md:p-10 shadow-2xl">
+          <h2 className="text-3xl font-bold text-primary mb-2 text-center">
             Create Account
           </h2>
-          <p className="text-gray-600 text-center mb-8">
+          <p className="text-secondary  text-center mb-8">
             Join AssetVerse as an employee
           </p>
 
@@ -120,7 +120,7 @@ const Register = () => {
                   type="text"
                   {...register("name", { required: true })}
                   placeholder="Full Name"
-                  className="w-full px-5 py-4 rounded-xl bg-white border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-5 py-4 rounded-xl bg- border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 {errors.name && (
                   <p className="text-red-600 text-sm mt-1">Name is required</p>
@@ -132,7 +132,7 @@ const Register = () => {
                 <input
                   type="date"
                   {...register("dob", { required: true })}
-                  className="w-full px-5 py-4 rounded-xl bg-white border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-5 py-4 rounded-xl bg- border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <Calendar
                   size={18}
@@ -152,7 +152,7 @@ const Register = () => {
                 type="email"
                 {...register("email", { required: true })}
                 placeholder="Work Email"
-                className="w-full px-5 py-4 rounded-xl bg-white border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-5 py-4 rounded-xl bg- border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               {errors.email && (
                 <p className="text-red-600 text-sm mt-1">Email is required</p>
@@ -170,7 +170,7 @@ const Register = () => {
                     /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#^()_+]).{8,}$/,
                 })}
                 placeholder="Password"
-                className="w-full px-5 py-4 rounded-xl bg-white border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-5 py-4 rounded-xl bg- border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
               <button
                 type="button"
@@ -211,7 +211,7 @@ const Register = () => {
 
             <button
               type="submit"
-              className="w-full py-4 rounded-xl font-semibold text-white bg-gradient-to-r from-blue-600 to-indigo-600 hover:scale-[1.02] transition shadow-lg"
+              className="w-full py-4 rounded-xl font-semibold text-white bg-primary border hover:scale-[1.02] transition shadow-lg"
             >
               Register
             </button>
@@ -219,11 +219,11 @@ const Register = () => {
 
           <SocialLogin></SocialLogin>
 
-          <p className="text-center text-gray-600 mt-8 text-sm">
+          <p className="text-center text-secondary mt-8 text-sm">
             Already have an account?{" "}
             <Link
               to="/login"
-              className="text-blue-600 hover:text-blue-500 font-medium"
+              className="text-primary hover:text-blue-500 font-medium"
             >
               Sign in
             </Link>

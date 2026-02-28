@@ -18,7 +18,7 @@ const ChatWidget = () => {
       {open && (
         <div className="fixed bottom-20 right-6 w-80 md:w-96 bg-white rounded-xl shadow-2xl overflow-hidden z-50 flex flex-col">
           {/* Header */}
-          <div className="bg-blue-600 text-white p-4 flex justify-between items-center">
+          <div className="bg-primary text-white p-4 flex justify-between items-center">
             <h4 className="font-bold text-lg">Support Chat</h4>
             <button
               onClick={() => setOpen(false)}
@@ -34,7 +34,7 @@ const ChatWidget = () => {
               Hi! How can we help you today?
             </div>
             {/* Example user message */}
-            <div className="bg-blue-600 text-white p-3 rounded-lg self-end">
+            <div className="bg-primary text-white p-3 rounded-lg self-end">
               I have a question about AssetVerse.
             </div>
           </div>
@@ -45,7 +45,7 @@ const ChatWidget = () => {
               placeholder="Type a message..."
               className="flex-1 border rounded-full px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
-            <button className="bg-blue-600 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition">
+            <button className="bg-primary text-white px-4 py-2 rounded-full hover:bg-blue-700 transition">
               Send
             </button>
           </div>

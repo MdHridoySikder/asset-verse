@@ -57,14 +57,14 @@ const RequestAnAsset = () => {
   };
 
   return (
-    <div className="p-6 md:p-10 bg-blue-50 min-h-screen">
+    <div className="p-6 md:p-10  min-h-screen">
       <div className="max-w-7xl mx-auto">
         {/* Heading */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 bg-clip-text text-transparent">
+          <h1 className="sm:text-4xl heading-db font-extrabold bg-primary to-indigo-600 bg-clip-text text-transparent">
             Company Assets
           </h1>
-          <p className="text-gray-500 text-lg">
+          <p className="text-secondary sub-heading mt-2">
             Request the assets you need from your company
           </p>
 
@@ -80,7 +80,7 @@ const RequestAnAsset = () => {
           {assets.map((asset) => (
             <div
               key={asset._id}
-              className="bg-white rounded-2xl shadow-md hover:shadow-xl border border-blue-700 flex flex-col relative"
+              className="group  border border-blue-400 rounded-xl shadow-md hover:border-blue-800 transition-all hover:shadow-2xl hover:shadow-blue-200/30  duration-300 overflow-hidden relative flex flex-col h-full"
             >
               <span className="absolute top-3 right-3 bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
                 {asset.productType}

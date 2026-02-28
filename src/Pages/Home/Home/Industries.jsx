@@ -54,13 +54,13 @@ const Industries = () => {
         {/* Section Title */}
         <div className="text-center mb-16">
           <h2
-            className="text-4xl md:text-7xl font-extrabold tracking-tight leading-tight md:leading-snug 
-               bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 bg-clip-text text-transparent 
-               drop-shadow-lg "
+            className="sm:text-4xl heading font-extrabold tracking-tight leading-tight md:leading-snug 
+               bg-primary bg-clip-text text-transparent 
+               drop-shadow-lg mb-2"
           >
             Industries We Serve
           </h2>
-          <p className="text-gray-700 text-xm md:text-xl max-w-4xl mx-auto leading-relaxed drop-shadow-lg">
+          <p className="text-secondary sm:text-xm sub-heading max-w-4xl mx-auto leading-relaxed drop-shadow-lg">
             Our asset management solutions are tailored to meet the unique needs
             of various industries, providing specialized features for different
             sectors.
@@ -72,15 +72,15 @@ const Industries = () => {
           {industries.map((industry, index) => (
             <div
               key={index}
-              className="bg-white/60 backdrop-blur-xl rounded-2xl p-8 hover:shadow-2xl hover:scale-105 transition-transform duration-300 border border-blue-200"
+              className=" backdrop-blur-xl rounded-2xl p-8 group hover:border-blue-400 hover:shadow-2xl hover:shadow-blue-300/30 transition-all duration-300 border border-secondary"
             >
               <div className="w-16 h-16 flex items-center justify-center mb-4">
                 {industry.icon}
               </div>
-              <h3 className="text-2xl font-bold text-blue-600 mb-2">
+              <h3 className="text-2xl font-bold text-primary mb-2">
                 {industry.name}
               </h3>
-              <p className="text-gray-700">{industry.description}</p>
+              <p className="text-secondary">{industry.description}</p>
             </div>
           ))}
         </div>

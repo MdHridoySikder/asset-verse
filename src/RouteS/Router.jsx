@@ -23,6 +23,10 @@ import HRRegister from "../Pages/Auth/HRRegister";
 import PaymentSuccess from "../Pages/Dashboard/Hr/PaymentSuccess";
 import Paymentcancelled from "../Pages/Dashboard/Hr/Paymentcancelled";
 import HRList from "../Pages/Dashboard/Hr/HRList";
+import ChatWidget from "../Pages/Home/Home/ChatWidget";
+import FAQSection from "../Pages/Home/Home/FAQSection";
+import Package from "../Pages/Home/Package";
+import AboutUs from "../Pages/Home/Home/AboutUs";
 
 export const router = createBrowserRouter([
   {
@@ -54,6 +58,22 @@ export const router = createBrowserRouter([
       {
         path: "*",
         Component: NotFound,
+      },
+      {
+        path: "/chatWidget",
+        Component: ChatWidget,
+      },
+      {
+        path: "/fAQSection",
+        Component: FAQSection,
+      },
+      {
+        path: "/package",
+        Component: Package,
+      },
+      {
+        path: "/AboutUs",
+        Component: AboutUs,
       },
     ],
   },

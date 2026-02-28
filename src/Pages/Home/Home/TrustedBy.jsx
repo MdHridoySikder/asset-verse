@@ -32,10 +32,10 @@ const TrustedBy = () => {
   return (
     <section className="py-10  text-black relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 text-center relative z-10">
-        <h2 className="text-3xl md:text-5xl font-extrabold mb-4 bg-gradient-to-r from-blue-500 via-blue-600 to-indigo-600 bg-clip-text text-transparent drop-shadow-lg">
-          Powering Smart Asset Decisions Globally
+        <h2 className="sm:text-3xl heading font-extrabold mb-2 pb-1   bg-primary bg-clip-text text-transparent drop-shadow-lg">
+          Smart Assets Global Reach
         </h2>
-        <p className="text-gray-700 text-xm md:text-xl max-w-4xl mx-auto leading-relaxed drop-shadow-lg">
+        <p className="text-secondary sm:text-xm sub-heading max-w-4xl mx-auto leading-relaxed drop-shadow-lg">
           AssetVerse is trusted by forward-thinking companies to streamline
           asset management, improve visibility, and drive confident, data-driven
           decisions across their organizations.
@@ -62,9 +62,9 @@ const TrustedBy = () => {
             {brands.map((brand, index) => (
               <SwiperSlide
                 key={index}
-                className="flex flex-col items-center justify-center gap-2 w-36 h-36"
+                className="flex flex-col items-center justify-center gap-2 w-36 h-36 mt-1"
               >
-                <div className="p-4 bg-white/80 rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
+                <div className="p-4 border border-secondary rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform duration-300">
                   {brand.icon}
                 </div>
                 <span className="text-gray-700 font-medium text-sm md:text-base mt-2">

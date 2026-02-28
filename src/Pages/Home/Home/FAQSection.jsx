@@ -43,13 +43,16 @@ const FAQSection = () => {
       <div className="max-w-4xl mx-auto px-6 relative z-10">
         {/* Title */}
         <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-5">
+          <h2
+            className="sm:text-5xl  heading font-extrabold tracking-tight leading-tight md:leading-snug 
+             text-primary drop-shadow-lg mb-2"
+          >
             Frequently Asked{" "}
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent ">
               Questions
             </span>
           </h2>
-          <p className="text-gray-600 md:text-lg max-w-2xl mx-auto">
+          <p className="text-secondary sub-heading max-w-2xl mx-auto">
             Everything you need to know about AssetVerse, security, features,
             and pricing.
           </p>
@@ -66,8 +69,8 @@ const FAQSection = () => {
                 key={index}
                 className={`rounded-2xl border transition-all duration-300 ${
                   isOpen
-                    ? "bg-white shadow-xl border-blue-200"
-                    : "bg-white/70 border-gray-200 hover:shadow-lg"
+                    ? "bg- shadow-xl border-blue-900"
+                    : "bg- border border-blue-400 "
                 }`}
               >
                 <button
@@ -78,14 +81,14 @@ const FAQSection = () => {
                     <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white flex items-center justify-center shadow-md">
                       <Icon size={20} />
                     </div>
-                    <h3 className="text-lg md:text-xl font-semibold text-gray-800">
+                    <h3 className="text-lg md:text-xl font-semibold text-secondary">
                       {faq.question}
                     </h3>
                   </div>
 
                   <ChevronDown
                     className={`transition-transform duration-300 ${
-                      isOpen ? "rotate-180 text-blue-600" : "text-gray-500"
+                      isOpen ? "rotate-180 text-gray-600" : "text-blue-600"
                     }`}
                   />
                 </button>
@@ -98,7 +101,7 @@ const FAQSection = () => {
                       : "grid-rows-[0fr] opacity-0"
                   }`}
                 >
-                  <div className="overflow-hidden px-6 pb-6 text-gray-600 text-base md:text-lg leading-relaxed">
+                  <div className="overflow-hidden px-6 pb-6 text-secondary text-base md:text-lg leading-relaxed">
                     {faq.answer}
                   </div>
                 </div>
