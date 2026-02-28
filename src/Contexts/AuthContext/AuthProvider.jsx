@@ -10,6 +10,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "../../Firebase/Firebase.init";
+import { sendPasswordResetEmail } from "firebase/auth";
 
 const googleProvider = new GoogleAuthProvider();
 
@@ -24,6 +25,10 @@ const AuthProvider = ({ children }) => {
     // Signed up
 
     // ...
+  };
+
+  const resetPassword = (email) => {
+    return sendPasswordResetEmail(auth, email);
   };
   const logInUser = (email, password) => {
     setLoading(true);
@@ -61,6 +66,7 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     registerUser,
+    resetPassword,
     logInUser,
     signingWithGoogle,
     logOut,

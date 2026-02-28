@@ -27,6 +27,8 @@ import ChatWidget from "../Pages/Home/Home/ChatWidget";
 import FAQSection from "../Pages/Home/Home/FAQSection";
 import Package from "../Pages/Home/Package";
 import AboutUs from "../Pages/Home/Home/AboutUs";
+import Blog from "../Pages/Home/Home/Blog";
+import BlogDetails from "../Pages/Home/Home/BlogDetails";
 
 export const router = createBrowserRouter([
   {
@@ -74,6 +76,14 @@ export const router = createBrowserRouter([
       {
         path: "/AboutUs",
         Component: AboutUs,
+      },
+      {
+        path: "/blog",
+        Component: Blog,
+      },
+      {
+        path: "/blogdetails",
+        Component: BlogDetails,
       },
     ],
   },

@@ -3,49 +3,63 @@ import { useForm } from "react-hook-form";
 import UseAuth from "../../../Hooks/UseAuth";
 import { Link, useLocation, useNavigate } from "react-router";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { HiOutlineShieldCheck } from "react-icons/hi2";
 import SocialLogin from "../SocialLogin/SocialLogin";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  // react-hook-form
   const {
     register,
     handleSubmit,
+    getValues,
     formState: { errors },
   } = useForm();
 
-  const { logInUser } = UseAuth();
+  const { logInUser, resetPassword } = UseAuth();
   const location = useLocation();
   const navigate = useNavigate();
 
+  // Login function
   const handleLogin = (data) => {
-    console.log("Login Data:", data);
+    setLoading(true);
+
     logInUser(data.email, data.password)
-      .then((result) => {
-        console.log(result.user);
+      .then(() => {
+        toast.success("Login successful");
         navigate(location.state || "/");
       })
       .catch((error) => {
-        console.log(error);
+        toast.error("Password is incorrect");
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
+
+  // Forgot Password function
+  const handleForgotPassword = () => {
+    const email = getValues("email");
+    if (!email) {
+      return toast.error("Please enter your email first");
+    }
+
+    resetPassword(email)
+      .then(() => {
+        toast.success("Password reset email sent");
+      })
+      .catch((error) => {
+        toast.error(error.message);
       });
   };
 
   return (
     <div className="min-h-screen relative flex items-center justify-center py-15 overflow-hidden px-6">
-      {/* Soft Gradient Blobs */}
-      <div className="absolute -top-32 -left-32 w-[500px] h-[500px] bg-blue-400/30 rounded-full blur-[120px]" />
-      <div className="absolute bottom-0 right-0 w-[400px] h-[400px] bg-indigo-400/30 rounded-full blur-[120px]" />
-
       <div className="relative z-10 w-full max-w-6xl grid lg:grid-cols-2 gap-14 items-center">
         {/* Left Content */}
         <div className="space-y-4 text-gray-900">
-          {/* <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-100 border border-blue-200 text-blue-700 text-sm font-medium">
-            <HiOutlineShieldCheck className="text-lg" />
-            Enterprise-grade Security
-          </span> */}
-
           <h1 className=" sm:text-5xl heading font-extrabold leading-tight text-primary">
             Manage Assets <br />
           </h1>
@@ -68,10 +82,11 @@ const Login = () => {
         </div>
 
         {/* Login Card */}
-        <div className=" backdrop-blur-2xl border border-blue-200 rounded-3xl p-8 md:p-10 shadow-2xl">
+        <div className="backdrop-blur-2xl border border-blue-200 rounded-3xl p-8 md:p-10 shadow-2xl">
           <h2 className="text-3xl font-bold text-primary mb-2 text-center">
             Welcome Back
           </h2>
+
           <p className="text-secondary text-center mb-8">
             Sign in to continue to AssetVerse
           </p>
@@ -84,12 +99,18 @@ const Login = () => {
               </label>
               <input
                 type="email"
-                {...register("email", { required: true })}
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                    message: "Invalid email address",
+                  },
+                })}
                 placeholder="hr@company.com"
-                className="w-full px-5 py-4 rounded-xl  border border-blue-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full px-5 py-4 rounded-xl border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
-              {errors.email?.type === "required" && (
-                <p className="text-red-600 mt-1">Email is required</p>
+              {errors.email && (
+                <p className="text-red-600 mt-1">{errors.email.message}</p>
               )}
             </div>
 
@@ -98,12 +119,19 @@ const Login = () => {
               <label className="text-sm text-secondary mb-2 block">
                 Password
               </label>
+
               <div className="relative">
                 <input
                   type={showPassword ? "text" : "password"}
-                  {...register("password", { required: true, minLength: 6 })}
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters",
+                    },
+                  })}
                   placeholder="••••••••••"
-                  className="w-full px-5 py-4 rounded-xl  border border-blue-300 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-5 py-4 rounded-xl border border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
                 />
                 <button
                   type="button"
@@ -113,30 +141,40 @@ const Login = () => {
                   {showPassword ? <FaEyeSlash /> : <FaEye />}
                 </button>
               </div>
-              {errors.password?.type === "required" && (
-                <p className="text-red-600 mt-1">Password is required</p>
+              {errors.password && (
+                <p className="text-red-600 mt-1">{errors.password.message}</p>
               )}
-              {errors.password?.type === "minLength" && (
-                <p className="text-red-600 mt-1">
-                  Password must be at least 6 characters
-                </p>
-              )}
+
               <div className="flex justify-end mt-2">
-                <a href="#" className="text-sm text-blue-600 hover:underline">
+                <button
+                  type="button"
+                  onClick={handleForgotPassword}
+                  className="text-sm text-blue-600 hover:underline"
+                >
                   Forgot password?
-                </a>
+                </button>
               </div>
             </div>
 
-            {/* Button */}
+            {/* Submit button */}
             <button
               type="submit"
-              className="w-full py-4 rounded-xl font-semibold border text-white bg-primary hover:scale-[1.02] transition-all shadow-lg"
+              disabled={loading}
+              className="w-full py-4 rounded-xl font-semibold border text-white bg-primary hover:scale-[1.02] transition-all shadow-lg flex justify-center items-center gap-2 disabled:opacity-70"
             >
-              Sign In
+              {loading ? (
+                <>
+                  <span className="loading loading-spinner loading-sm"></span>
+                  Signing In...
+                </>
+              ) : (
+                "Sign In"
+              )}
             </button>
           </form>
-          <SocialLogin></SocialLogin>
+
+          <SocialLogin />
+
           <p className="text-center text-gray-600 mt-8 text-sm">
             New to AssetVerse?{" "}
             <Link
@@ -148,6 +186,8 @@ const Login = () => {
           </p>
         </div>
       </div>
+
+      <ToastContainer position="top-right" autoClose={1500} />
     </div>
   );
 };
