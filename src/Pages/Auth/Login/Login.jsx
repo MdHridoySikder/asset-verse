@@ -16,7 +16,12 @@ const Login = () => {
     handleSubmit,
     getValues,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      email: "assetverse@gmail.com",
+      password: "aaaaAAAA@@147852",
+    },
+  });
 
   const { logInUser, resetPassword } = UseAuth();
   const location = useLocation();

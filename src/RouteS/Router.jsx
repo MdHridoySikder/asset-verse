@@ -29,6 +29,7 @@ import Package from "../Pages/Home/Package";
 import AboutUs from "../Pages/Home/Home/AboutUs";
 import Blog from "../Pages/Home/Home/Blog";
 import BlogDetails from "../Pages/Home/Home/BlogDetails";
+import Analytics from "../Pages/Dashboard/Analytics";
 
 export const router = createBrowserRouter([
   {
@@ -167,6 +168,10 @@ export const router = createBrowserRouter([
             <MyTeam></MyTeam>
           </AdminRoutes>
         ),
+      },
+      {
+        path: "analytics",
+        Component: Analytics,
       },
       {
         path: "my-assets",

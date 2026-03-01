@@ -4,7 +4,7 @@ import { FaTimesCircle } from "react-icons/fa";
 
 const PaymentCancelled = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-blue-50 to-blue-50 relative overflow-hidden px-6">
+    <section className="min-h-screen flex items-center justify-center  ">
       {/* Background */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <div className="absolute top-0 left-0 w-96 h-96 bg-red-400/30 rounded-full blur-3xl animate-pulse"></div>
@@ -12,7 +12,7 @@ const PaymentCancelled = () => {
       </div>
 
       {/* Card */}
-      <div className="relative z-10 bg-white rounded-3xl shadow-2xl shadow-red-200/40 p-10 max-w-xl w-full text-center border border-red-400 transform hover:scale-[1.02] transition-transform duration-300">
+      <div className="relative z-10    rounded-3xl shadow-2xl shadow-red-200/40 p-10 max-w-xl w-full text-center border border-red-400 transform hover:scale-[1.02] transition-transform duration-300">
         {/* Cancel Icon */}
         <div className="flex justify-center mb-6 relative">
           <div className="relative bg-red-100 p-6 rounded-full shadow-lg">

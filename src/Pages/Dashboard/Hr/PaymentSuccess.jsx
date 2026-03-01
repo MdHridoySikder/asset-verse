@@ -8,7 +8,7 @@ const PaymentSuccess = () => {
   const { user } = UseAuth();
 
   return (
-    <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-blue-50 to-blue-50 relative overflow-hidden px-6">
+    <section className="min-h-screen flex items-center justify-center  relative overflow-hidden px-6">
       {/* Background */}
       <div className="absolute inset-0 opacity-20 pointer-events-none">
         <div className="absolute top-0 left-0 w-96 h-96 bg-blue-400/30 rounded-full blur-3xl animate-pulse"></div>
@@ -16,7 +16,7 @@ const PaymentSuccess = () => {
       </div>
 
       {/* Card */}
-      <div className="relative z-10 bg-white rounded-3xl shadow-2xl shadow-blue-200/40 p-8 my-10 max-w-xl w-full text-center border border-blue-800 transform hover:scale-[1.02] transition-transform duration-300">
+      <div className="relative z-10 rounded-3xl shadow-2xl shadow-blue-200/40 p-8 my-10 max-w-xl w-full text-center border border-blue-800 transform hover:scale-[1.02] transition-transform duration-300">
         {/* Success Badge */}
         <div className="flex justify-center mb-6 relative">
           <div className="relative bg-green-100 p-6 rounded-full shadow-lg group">
@@ -32,7 +32,7 @@ const PaymentSuccess = () => {
         <h1 className="text-3xl md:text-5xl py-2 font-extrabold bg-gradient-to-r from-blue-500 to-indigo-600 bg-clip-text text-transparent mb-">
           Congratulations <br />
         </h1>
-        <p className="text-2xl text-blue-700 font-extrabold bg-gradient-to-r from-blue-50 via-blue-100 to-blue-50 ">
+        <p className="text-2xl text-blue-700 font-extrabold  to-blue-50 ">
           {user?.displayName || "User"}
         </p>
 
@@ -40,7 +40,7 @@ const PaymentSuccess = () => {
           Your payment has been successfully completed.
         </p>
 
-        <div className="bg-gradient-to-r from-blue-100 to-indigo-100 border border-blue-200 rounded-2xl p-5 mb-8 shadow-inner hover:shadow-xl transition-shadow duration-300">
+        <div className="border border-blue-700 hover:border-blue-400 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-300/30 rounded-2xl p-5 mb-8 shadow-inner hover:shadow-xl transition-shadow duration-300">
           <div className="flex items-center justify-center gap-2 text-blue-700 font-semibold mb-2">
             <FaCrown className="text-yellow-500 animate-bounce" />
             Premium Features Activated

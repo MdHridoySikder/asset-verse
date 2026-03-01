@@ -5,9 +5,9 @@ import { FaRocket, FaExclamationTriangle } from "react-icons/fa";
 
 const NotFound = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-blue-50 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center  overflow-hidden">
       {/* Background  */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-blue-100 -z-10"></div>
+      <div className="absolute inset-0 bg--to-br from-blue-50 via-white to-blue-100 -z-10"></div>
 
       {/* Animated  */}
       <div className="absolute -top-32 -left-32 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl animate-blob animation-delay-2000"></div>
@@ -22,7 +22,7 @@ const NotFound = () => {
           404
         </h1>
 
-        <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4 animate-fadeInUp">
+        <h2 className="text-2xl md:text-3xl font-bold text-primary mb-4 animate-fadeInUp">
           Oops! Page Not Found
         </h2>
 

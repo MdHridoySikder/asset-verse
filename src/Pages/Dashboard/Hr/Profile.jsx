@@ -147,7 +147,7 @@ const Profile = () => {
         {/* Modal */}
         {isOpen && (
           <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
-            <div className="bg-white w-full max-w-md rounded-2xl shadow-lg p-6 relative">
+            <div className=" bg-gray-400 w-full max-w-md rounded-2xl shadow-lg p-6 relative border border-primary">
               <button
                 onClick={() => setIsOpen(false)}
                 className="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
@@ -155,28 +155,28 @@ const Profile = () => {
                 <X />
               </button>
 
-              <h2 className="text-xl font-semibold mb-4">Edit Profile</h2>
+              <h2 className="text-xl font-semibold mb-4 text-primary">
+                Edit Profile
+              </h2>
 
-              <label className="block text-sm mb-1 text-gray-600">
-                Full Name
-              </label>
+              <label className="block text-sm mb-1 text-black">Full Name</label>
               <input
                 type="text"
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
                 className="w-full border rounded-xl px-4 py-2 mb-4
-                  focus:outline-none focus:ring-2 focus:ring-primary"
+                  focus:outline-none focus:ring-2 focus:ring-primary text-secondary"
               />
 
-              <label className="block text-sm mb-1 text-gray-600">
+              <label className="block text-sm mb-1 text-black">
                 Email Address
               </label>
               <input
                 type="email"
                 value={user.email}
                 disabled
-                className="w-full border rounded-xl px-4 py-2 bg-gray-100
-                  cursor-not-allowed text-gray-500"
+                className="w-full border rounded-xl px-4 py-2 
+                  cursor-not-allowed text-secondary "
               />
 
               <div className="mt-6 flex justify-end gap-3">

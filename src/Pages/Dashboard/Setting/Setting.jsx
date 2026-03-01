@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Lock, Sun, Moon, Mail, LogOut } from "lucide-react";
+import UseAuth from "../../../Hooks/UseAuth"; // Auth import
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Setting = () => {
+  const { logOut } = UseAuth(); // logout function
   const [emailNotif, setEmailNotif] = useState(true);
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem("theme") === "dark",
@@ -35,6 +37,17 @@ const Setting = () => {
     toast.info("Password change feature coming soon!");
   };
 
+  const handleLogout = () => {
+    logOut()
+      .then(() => {
+        toast.success("Logged out successfully!");
+        window.location.href = "/login"; // redirect to login page
+      })
+      .catch((err) => {
+        toast.error("Logout failed!");
+      });
+  };
+
   return (
     <>
       <ToastContainer position="top-right" autoClose={1500} />
@@ -42,10 +55,10 @@ const Setting = () => {
       <div className="p-6 space-y-6 min-h-screen bg-base-200 transition-all">
         {/* Header */}
         <div className="flex items-center gap-3 mb-6">
-          <div className="bg-base-100 text-primary w-12 h-12 flex items-center justify-center rounded-xl shadow-md">
-            <Lock className="w-6 h-6" />
+          <div className="bg-base-100 text-primary w-15 h-15 flex items-center justify-center rounded-xl shadow-md">
+            <Lock className="w-8 h-8" />
           </div>
-          <h1 className="text-3xl font-bold text-base-content">Settings</h1>
+          <h1 className="heading-db  font-bold text-primary">Settings</h1>
         </div>
 
         {/* Settings Card */}
@@ -92,7 +105,7 @@ const Setting = () => {
             </label>
           </div>
 
-          {/* Email Notifications demo */}
+          {/* Email Notifications */}
           <div className="flex items-center justify-between p-4 border rounded-xl">
             <div className="flex items-center gap-3">
               <Mail className="text-primary w-6 h-6" />
@@ -112,7 +125,9 @@ const Setting = () => {
               <LogOut className="text-primary w-6 h-6" />
               <p className="font-medium">Logout</p>
             </div>
-            <button className="btn btn-error btn-sm">Logout</button>
+            <button onClick={handleLogout} className="btn btn-error btn-sm">
+              Logout
+            </button>
           </div>
         </div>
       </div>

@@ -1,4 +1,9 @@
-import { CopyPlus, HousePlus, LayoutDashboard } from "lucide-react";
+import {
+  CopyPlus,
+  HousePlus,
+  LayoutDashboard,
+  LucideBuilding2,
+} from "lucide-react";
 import React from "react";
 import { BiPhoneIncoming } from "react-icons/bi";
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
@@ -6,12 +11,13 @@ import { MdEmail } from "react-icons/md";
 import { PiAddressBookThin } from "react-icons/pi";
 import { Link, NavLink } from "react-router";
 import UseAuth from "../../../Hooks/UseAuth";
+import { SiMicrodotblog } from "react-icons/si";
 
 const Footer = () => {
   const { user } = UseAuth();
 
   return (
-    <footer className="bg--to-br from-blue-100 via-blue-50 to-blue-50 text-black pt-12 relative">
+    <footer className=" text-black pt-12 relative">
       {/* Unique Top Border */}
       <div
         className="border-t border-blue-200 mb-4 text-center text-sm text-secondary"
@@ -61,16 +67,32 @@ const Footer = () => {
             </li>
 
             {user ? (
-              <li>
+              <>
                 <NavLink
-                  to="/dashboard"
+                  to="/blog"
                   className="flex items-center gap-2 hover:text-blue-600"
                 >
-                  <LayoutDashboard className="w-4 h-4" /> Dashboard
+                  <SiMicrodotblog className="w-4 h-4 inline mr-1" /> Blog
                 </NavLink>
-              </li>
+                <li>
+                  <NavLink
+                    to="/dashboard"
+                    className="flex items-center gap-2 hover:text-blue-600"
+                  >
+                    <LayoutDashboard className="w-4 h-4" /> Dashboard
+                  </NavLink>
+                </li>
+              </>
             ) : (
               <>
+                <li>
+                  <Link
+                    to="/AboutUs"
+                    className="flex items-center gap-2 hover:text-blue-600"
+                  >
+                    <LucideBuilding2 className="w-4 h-4 inline mr-1" /> About Us
+                  </Link>
+                </li>
                 <li>
                   <Link
                     to="/register"
@@ -101,11 +123,11 @@ const Footer = () => {
                 About Us
               </Link>
             </li>
-            <li>
-              <Link to="/package" className="hover:text-blue-600">
-                Pricing
+            {/* <li>
+              <Link to="/blog" className="hover:text-blue-600">
+                Blog
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/fAQSection" className="hover:text-blue-600">
                 FAQs

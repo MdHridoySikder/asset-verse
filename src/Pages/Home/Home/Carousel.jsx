@@ -69,7 +69,7 @@ const Carousel = () => {
 
               <Link
                 to={slide.link}
-                className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-400 rounded-full font-semibold shadow-xl hover:scale-105 transition-all duration-300"
+                className="inline-block px-6 py-3 bg-primary hover:bg-blue-400 rounded-full font-semibold shadow-xl hover:scale-105 transition-all duration-300"
               >
                 {slide.btnText}
               </Link>
@@ -84,13 +84,13 @@ const Carousel = () => {
           onClick={() =>
             setCurrent((current - 1 + slides.length) % slides.length)
           }
-          className="bg-blue-600 hover:bg-blue-500 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-xl transition-all"
+          className="bg-primary hover:bg-blue-500 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-xl transition-all"
         >
           ❮
         </button>
         <button
           onClick={() => setCurrent((current + 1) % slides.length)}
-          className="bg-blue-600 hover:bg-blue-500 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-xl transition-all"
+          className="bg-primary hover:bg-blue-500 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-xl transition-all"
         >
           ❯
         </button>

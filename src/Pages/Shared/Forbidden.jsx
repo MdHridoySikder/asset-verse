@@ -3,7 +3,7 @@ import { Lock, Shield, ArrowRight } from "lucide-react";
 
 const Forbidden = () => {
   return (
-    <div className="relative min-h-screen bg-blue-50 overflow-hidden flex items-center justify-center px-6">
+    <div className="relative min-h-screen  overflow-hidden flex items-center justify-center px-6">
       <div className="absolute inset-0">
         {/* grid */}
         <div
@@ -20,7 +20,7 @@ const Forbidden = () => {
         <div className="absolute bottom-0 -right-40 w-[500px] h-[500px] bg-indigo-300 rounded-full blur-[140px] opacity-40"></div>
       </div>
 
-      <div className="relative z-10 w-full max-w-5xl bg-white rounded-[32px] shadow-[0_40px_100px_-30px_rgba(37,99,235,0.35)] border border-blue-100 overflow-hidden">
+      <div className="relative z-10 w-full max-w-5xl  rounded-[32px] shadow-[0_40px_100px_-30px_rgba(37,99,235,0.35)] border border-blue-100 overflow-hidden">
         <div className="grid md:grid-cols-2">
           <div className="relative bg-gradient-to-br from-blue-600 to-indigo-700 p-12 flex flex-col justify-center text-white">
             {/* rings */}
@@ -54,17 +54,17 @@ const Forbidden = () => {
               </div>
             </div>
 
-            <h2 className="text-3xl font-bold text-gray-900">Access Denied</h2>
+            <h2 className="text-3xl font-bold text-primary">Access Denied</h2>
 
-            <p className="mt-4 text-gray-600 leading-relaxed max-w-md">
+            <p className="mt-4 text-secondary leading-relaxed max-w-md">
               You don’t have the required permission to view this page. Your
               current role does not meet the access criteria defined by{" "}
-              <span className="font-semibold text-blue-700">AssetVerse</span>.
+              <span className="font-semibold text-primary">AssetVerse</span>.
             </p>
 
             {/* permission card */}
-            <div className="mt-6 rounded-xl border border-blue-100 bg-blue-50 px-5 py-4">
-              <p className="text-sm text-blue-700 font-medium">
+            <div className="mt-6 rounded-xl border border-blue-600 bg-blue-50 px-5 py-4">
+              <p className="text-sm text-primary font-medium">
                 Permission Status
               </p>
               <p className="text-xs text-gray-500 mt-1">
@@ -76,7 +76,7 @@ const Forbidden = () => {
             <div className="mt-8 flex flex-wrap gap-4">
               <Link
                 to="/dashboard"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700 transition shadow-md"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary text-white font-medium hover:bg-blue-700 transition shadow-md"
               >
                 Return to Dashboard
                 <ArrowRight size={18} />
@@ -84,7 +84,7 @@ const Forbidden = () => {
 
               <Link
                 to="/"
-                className="px-6 py-3 rounded-xl border border-blue-200 text-blue-700 font-medium hover:bg-blue-100 transition"
+                className="px-6 py-3 rounded-xl border border-blue-200 text-primary font-medium hover:bg-blue-100 transition"
               >
                 Home
               </Link>

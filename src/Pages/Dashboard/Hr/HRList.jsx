@@ -94,7 +94,7 @@ const HRList = () => {
               {hrs.map((hr, index) => (
                 <tr
                   key={hr._id}
-                  className="hover:bg-blue-50 transition-colors duration-300"
+                  className="hover:bg-gray-400 transition-colors duration-300"
                 >
                   <td className="px-3 sm:px-6 py-2">{index + 1}</td>
 
@@ -153,7 +153,7 @@ const HRList = () => {
                         </button>
                       </div>
                     ) : (
-                      <span className="text-gray-400 text-xs sm:text-sm">
+                      <span className="text-secondary text-xs sm:text-sm">
                         Action Completed
                       </span>
                     )}

@@ -92,7 +92,7 @@ const MyEmployeeList = ({ onAddToTeam, teamMembers = [] }) => {
             {availableUsers.map((user, index) => (
               <tr
                 key={user._id || index}
-                className="hover:bg-blue-50 transition-colors duration-300"
+                className="hover:bg-gray-400 transition-colors duration-300"
               >
                 <td className="px-4 sm:px-6 py-3 whitespace-nowrap">
                   {index + 1}

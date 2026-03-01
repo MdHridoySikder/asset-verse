@@ -93,7 +93,7 @@ const RequestAnAsset = () => {
               />
 
               <div className="p-4 flex flex-col flex-1">
-                <h2 className="text-lg font-bold text-gray-800">
+                <h2 className="text-lg font-bold text-primary mb-1">
                   {asset.productName}
                 </h2>
 
